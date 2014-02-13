@@ -12,6 +12,7 @@
 #import "IDECodeSnippetRepositorySwizzler.h"
 #import "ACCodeSnippetGitDataStore.h"
 
+
 static ACCodeSnippetRepositoryPlugin *sharedPlugin;
 static NSString * const pluginMenuTitle = @"Plug-ins";
 
@@ -88,6 +89,11 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 - (void)doAction {
     NSAlert *alert = [NSAlert alertWithMessageText:@"Hello, World" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
     [alert runModal];
+    
+    for (id<ACCodeSnippetDataStoreProtocol> dataStore in [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores]) {
+        [dataStore updateCodeSnippets];
+    }
+    
 }
 
 @end

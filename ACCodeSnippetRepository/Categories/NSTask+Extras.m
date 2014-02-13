@@ -28,7 +28,7 @@
     task.launchPath = path;
     task.arguments = arguments;
     if (directoryPath) task.currentDirectoryPath = directoryPath;
-    //task.standardOutput = task.standardError = pipe;
+    //task.standardOutput = task.standardError = pipe; //TODO: fix
     task.standardOutput = pipe;
     [task launch];
     [task waitUntilExit];

@@ -9,6 +9,14 @@
 #import "ACGitRepository.h"
 #import "NSTask+Extras.h"
 
+NSString * const ACGitRepositoryFileChangeModifiedKey = @"M";
+NSString * const ACGitRepositoryFileChangeCopiedKey = @"C";
+NSString * const ACGitRepositoryFileChangeRenamedKey = @"R";
+NSString * const ACGitRepositoryFileChangeAddedKey = @"A";
+NSString * const ACGitRepositoryFileChangeDeletedKey = @"D";
+NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
+
+
 @implementation ACGitRepository
 
 - (instancetype)initWithLocalRepositoryDirectory:(NSString*)localRepositoryPath {
@@ -58,6 +66,22 @@
     }
 }
 
+- (NSString*)identifierForCurrentCommit {
+    if (![self localRepositoryExists]) return nil;
+    
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/bin/git";
+    task.arguments = @[@"rev-parse", @"HEAD"];
+    task.currentDirectoryPath = self.localRepositoryPath;
+    task.standardOutput = pipe;
+    [task launch];
+    [task waitUntilExit];
+    
+    NSData *data = [[pipe fileHandleForReading] availableData];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
 
 - (void)commit {
     if (![self localRepositoryExists]) return;
@@ -76,6 +100,16 @@
     self.taskLog = [self.taskLog stringByAppendingString:output];
 }
 
+- (void)fetch {
+    if (![self localRepositoryExists]) return;
+    
+    NSString *output;
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"fetch", @"origin"]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
+}
 
 - (void)pull {
     if (![self localRepositoryExists]) return;
@@ -118,6 +152,61 @@
     [self pull];
     [self commit];
     [self push];
+}
+
+- (NSDictionary*)changedFilesSinceCommitWithIdentifier:(NSString*)identifier {
+    return [self changedFilesSinceCommitWithIdentifier:identifier commitWithidentifier:@"HEAD"];
+}
+
+- (NSDictionary*)changedFilesWithOrigin {
+    return [self changedFilesSinceCommitWithIdentifier:@"HEAD" commitWithidentifier:@"origin"];
+}
+
+- (NSDictionary*)changedFilesSinceCommitWithIdentifier:(NSString*)sinceIdentifier commitWithidentifier:(NSString*)toIdentifier {
+    if (![self localRepositoryExists]) return nil;
+    
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/bin/git";
+    task.arguments = @[@"diff", @"--name-status", sinceIdentifier, toIdentifier];
+    task.currentDirectoryPath = self.localRepositoryPath;
+    task.standardOutput = pipe;
+    [task launch];
+    [task waitUntilExit];
+    
+    NSData *data = [[pipe fileHandleForReading] availableData];
+    NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    __block NSMutableDictionary *dictionary = [@{} mutableCopy];
+    
+    [output enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+        NSError *error;
+        NSString *pattern = @"(.?)\\s+(.*)";
+        __block NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:&error];
+        [line enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+            
+            [regex enumerateMatchesInString:line
+                                    options:0
+                                      range:NSMakeRange(0, line.length)
+                                 usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                                     
+                                     NSString *key = [line substringWithRange:[result rangeAtIndex:1]];
+                                     NSString *value = [line substringWithRange:[result rangeAtIndex:2]];
+                                     
+                                     NSMutableArray *files = dictionary[key];
+                                     if (!files) {
+                                         dictionary[key] = files = [@[] mutableCopy];
+                                     }
+                                     
+                                     [files addObject:value];
+                                     
+                                 }];
+        }];
+    }];
+    return dictionary;
 }
 
 - (void)removeLocalRepository {

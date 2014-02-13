@@ -9,6 +9,8 @@
 #import "ACCodeSnippetGitDataStore.h"
 #import "ACCodeSnippetSerialization.h"
 #import "NSString+Path.h"
+#import "IDECodeSnippetRepositorySwizzler.h"
+
 
 @implementation ACCodeSnippetGitDataStore
 
@@ -33,7 +35,7 @@
 #pragma mark - ACCodeSnippetDataStoreProtocol
 
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet {
-    NSLog(@"GitDataStore addCodeSnippet: %@", snippet);
+    NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore addCodeSnippet: %@", snippet);
     
     __block IDECodeSnippet *blockSnippet = snippet;
     __weak ACCodeSnippetGitDataStore *weakSelf = self;
@@ -51,7 +53,7 @@
 }
 
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet {
-    NSLog(@"GitDataStore removeCodeSnippet: %@", snippet);
+    NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore removeCodeSnippet: %@", snippet);
     
     __block IDECodeSnippet *blockSnippet = snippet;
     __weak ACCodeSnippetGitDataStore *weakSelf = self;
@@ -63,6 +65,31 @@
     }];
     [self.mainQueue addOperation:blockOperation];
 }
+
+- (void)updateCodeSnippets {
+    NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore updateCodeSnippets");
+    
+    __weak ACCodeSnippetGitDataStore *weakSelf = self;
+    
+    NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [weakSelf.gitRepository fetch];
+        
+        NSMutableDictionary *changes = [[weakSelf.gitRepository changedFilesWithOrigin] mutableCopy];
+        
+        [weakSelf updateDeletedFiles:changes[ACGitRepositoryFileChangeDeletedKey]];
+        [weakSelf updateDeletedFiles:changes[ACGitRepositoryFileChangeModifiedKey]];
+        
+        [weakSelf.gitRepository pull];
+        
+        [weakSelf updateAddedFiles:changes[ACGitRepositoryFileChangeAddedKey]];
+        [weakSelf updateAddedFiles:changes[ACGitRepositoryFileChangeModifiedKey]];
+        
+        [weakSelf.gitRepository commit];
+        [weakSelf.gitRepository push];
+    }];
+    [self.mainQueue addOperation:blockOperation];
+}
+
 
 #pragma mark - file operations
 
@@ -111,5 +138,46 @@
     return [NSString pathWithComponents:@[self.snippetDirectoryPath, @"git"]];
 }
 
+
+#pragma mark -
+
+- (void)updateDeletedFiles:(NSArray*)array {
+    NSError *error;
+    
+    for (NSString *filename in array) {
+        
+        NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
+        
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
+        IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+        
+        IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
+        
+        if (snippet) {
+            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
+        }
+    }
+}
+
+- (void)updateAddedFiles:(NSArray*)array {
+    NSError *error;
+    
+    for (NSString *filename in array) {
+        
+        NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
+        
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
+        
+        IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+
+        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addCodeSnippet:snippet];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] override_saveUserCodeSnippetToDisk:snippet];
+        });
+    }
+}
 
 @end

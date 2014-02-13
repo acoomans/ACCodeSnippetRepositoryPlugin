@@ -11,6 +11,7 @@
 		51010E0318AC5CB1000AA1F1 /* ACGitRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 51010E0118AC5CB1000AA1F1 /* ACGitRepository.m */; };
 		5105B22718AC59520066728E /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 5105B22618AC59520066728E /* NSTask+Extras.m */; };
 		5105B22818AC59520066728E /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 5105B22618AC59520066728E /* NSTask+Extras.m */; };
+		5132BF3618AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */; };
 		5133D0D018AC5CF900998BE2 /* ACGitRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */; };
 		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
 		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
@@ -46,6 +47,7 @@
 		51010E0118AC5CB1000AA1F1 /* ACGitRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGitRepository.m; sourceTree = "<group>"; };
 		5105B22518AC59520066728E /* NSTask+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Extras.h"; sourceTree = "<group>"; };
 		5105B22618AC59520066728E /* NSTask+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Extras.m"; sourceTree = "<group>"; };
+		5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetGitDataStoreTests.m; sourceTree = "<group>"; };
 		5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGitRepositoryTests.m; sourceTree = "<group>"; };
 		5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACCodeSnippetRepository Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5154068418AC4B500065CA33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -105,6 +107,7 @@
 			children = (
 				517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */,
 				5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */,
+				5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */,
 				5154068718AC4B500065CA33 /* Supporting Files */,
 			);
 			path = "ACCodeSnippetRepository Tests";
@@ -347,6 +350,7 @@
 				5105B22818AC59520066728E /* NSTask+Extras.m in Sources */,
 				51D2D55518AC590000493579 /* NSString+Path.m in Sources */,
 				517DF2A918AC4BF1008980B3 /* Swizzler.m in Sources */,
+				5132BF3618AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m in Sources */,
 				5133D0D018AC5CF900998BE2 /* ACGitRepositoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

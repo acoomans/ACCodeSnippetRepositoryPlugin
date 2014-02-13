@@ -21,8 +21,18 @@ static char const * const kIDECodeSnippetRepositorySwizzledDataStores = "kIDECod
 
 #pragma mark - overrides
 
+
+- (IDECodeSnippet*)override_codeSnippetForIdentifier:(NSString*)identifier {
+    for (IDECodeSnippet *snippet in [swelf codeSnippets]) {
+        if ([snippet.identifier isEqualToString:identifier]) {
+            return snippet;
+        }
+    }
+    return nil;
+}
+
 - (void)override_saveUserCodeSnippetToDisk:(id)arg1 { // saveUserCodeSnippetToDisk: instead of addCodeSnippet: so to catch edits as well
-    NSLog(@"saveUserCodeSnippetToDisk: %@", arg1);
+    NSLog(@"ACCodeSnippetRepositoryPlugin -- saveUserCodeSnippetToDisk: %@", arg1);
     
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [self dataStores]) {
         [dataStore addCodeSnippet:(IDECodeSnippet*)arg1];
@@ -32,7 +42,7 @@ static char const * const kIDECodeSnippetRepositorySwizzledDataStores = "kIDECod
 }
 
 - (void)override_removeCodeSnippet:(id)arg1 {
-    NSLog(@"removeCodeSnippet: %@", arg1);
+    NSLog(@"ACCodeSnippetRepositoryPlugin -- removeCodeSnippet: %@", arg1);
     
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [self dataStores]) {
         [dataStore removeCodeSnippet:(IDECodeSnippet*)arg1];

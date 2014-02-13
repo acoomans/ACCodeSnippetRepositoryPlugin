@@ -11,8 +11,17 @@
 #import "ACCodeSnippetDataStoreProtocol.h"
 
 @interface IDECodeSnippetRepository (Swizzled)
+
 @property (nonatomic, strong) NSArray *dataStores;
 - (void)addDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore;
+
+- (void)addCodeSnippet:(id)arg1;
+- (void)removeCodeSnippet:(id)arg1;
+
+- (IDECodeSnippet*)codeSnippetForIdentifier:(NSString*)identifier;
+
+- (void)override_saveUserCodeSnippetToDisk:(id)arg1;
+
 @end
 
 @interface IDECodeSnippetRepositorySwizzler : Swizzler
