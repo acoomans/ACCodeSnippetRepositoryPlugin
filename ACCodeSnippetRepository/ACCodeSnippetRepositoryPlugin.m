@@ -18,6 +18,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 
 @interface ACCodeSnippetRepositoryPlugin()
 @property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, weak) NSMenuItem *updateMenuItem;
 @end
 
 @implementation ACCodeSnippetRepositoryPlugin
@@ -41,16 +42,19 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         // add data stores to Xcode's snippet repository
         ACGitRepository *gitRepository = [[ACGitRepository alloc] init];
         ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] initWithGitRepository:gitRepository];
+        [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
         
         [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:gitDataStore];
         
         // Create menu items, initialize UI, etc.
         NSMenu *pluginMenu = [self pluginMenu];
+        pluginMenu.autoenablesItems = NO;
         
         if (pluginMenu) {
+            
             NSMenuItem *actionMenuItem = nil;
             
-            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Do action" action:@selector(doAction) keyEquivalent:@""];
+            self.updateMenuItem = actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Update snippets" action:@selector(updateAction:) keyEquivalent:@""];
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
@@ -86,14 +90,28 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 }
 
 // Sample Action, for menu item:
-- (void)doAction {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Hello, World" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [alert runModal];
+- (void)updateAction:(id)sender {
     
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores]) {
         [dataStore updateCodeSnippets];
     }
+}
+
+
+#pragma mark - NSKeyValueObserving
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
+    if ([keyPath isEqualToString:@"mainQueue.operationCount"]) {
+        
+        if ([[object valueForKeyPath:keyPath] integerValue] > 0) {
+            self.updateMenuItem.title = @"Updating snippets...";
+            self.updateMenuItem.enabled = NO;
+        } else {
+            self.updateMenuItem.title = @"Update snippets";
+            self.updateMenuItem.enabled = YES;
+        }
+    }
 }
 
 @end
