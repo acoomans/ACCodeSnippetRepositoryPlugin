@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
 		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
+		517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */; };
+		517DF2A718AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */; };
+		517DF2A818AC4BF1008980B3 /* Swizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A518AC4BF1008980B3 /* Swizzler.m */; };
+		517DF2A918AC4BF1008980B3 /* Swizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A518AC4BF1008980B3 /* Swizzler.m */; };
+		517FD2CE18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */; };
+		517FD2CF18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */; };
+		517FD2D118AC4C89003E1813 /* ACCodeSnippetSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */; };
 		518E69A318AC4A8900C57456 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E69A218AC4A8900C57456 /* AppKit.framework */; };
 		518E69A518AC4A8900C57456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E69A418AC4A8900C57456 /* Foundation.framework */; };
 		518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 518E69A918AC4A8900C57456 /* InfoPlist.strings */; };
@@ -36,6 +43,14 @@
 		517D919118AC4BA700A564B9 /* IDECodeSnippet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippet.h; sourceTree = "<group>"; };
 		517D919218AC4BA700A564B9 /* IDECodeSnippetLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippetLibrary.h; sourceTree = "<group>"; };
 		517D919318AC4BA700A564B9 /* IDECodeSnippetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippetRepository.h; sourceTree = "<group>"; };
+		517DF2A218AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippetRepositorySwizzler.h; sourceTree = "<group>"; };
+		517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDECodeSnippetRepositorySwizzler.m; sourceTree = "<group>"; };
+		517DF2A418AC4BF1008980B3 /* Swizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swizzler.h; sourceTree = "<group>"; };
+		517DF2A518AC4BF1008980B3 /* Swizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Swizzler.m; sourceTree = "<group>"; };
+		517DF2AE18AC4C1A008980B3 /* ACCodeSnippetDataStoreProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetDataStoreProtocol.h; sourceTree = "<group>"; };
+		517FD2CC18AC4C70003E1813 /* ACCodeSnippetSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetSerialization.h; sourceTree = "<group>"; };
+		517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetSerialization.m; sourceTree = "<group>"; };
+		517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetSerializationTests.m; sourceTree = "<group>"; };
 		518E699F18AC4A8900C57456 /* ACCodeSnippetRepository.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACCodeSnippetRepository.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		518E69A218AC4A8900C57456 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		518E69A418AC4A8900C57456 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,6 +85,7 @@
 		5154068618AC4B500065CA33 /* ACCodeSnippetRepository Tests */ = {
 			isa = PBXGroup;
 			children = (
+				517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */,
 				5154068718AC4B500065CA33 /* Supporting Files */,
 			);
 			path = "ACCodeSnippetRepository Tests";
@@ -90,6 +106,7 @@
 			children = (
 				517D918E18AC4BA700A564B9 /* classdump.txt */,
 				517D918F18AC4BA700A564B9 /* Headers */,
+				517DF2A118AC4BF1008980B3 /* Swizzle */,
 			);
 			path = IDE;
 			sourceTree = "<group>";
@@ -103,6 +120,43 @@
 				517D919318AC4BA700A564B9 /* IDECodeSnippetRepository.h */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		517DF2A118AC4BF1008980B3 /* Swizzle */ = {
+			isa = PBXGroup;
+			children = (
+				517DF2A418AC4BF1008980B3 /* Swizzler.h */,
+				517DF2A518AC4BF1008980B3 /* Swizzler.m */,
+				517DF2A218AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.h */,
+				517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */,
+			);
+			path = Swizzle;
+			sourceTree = "<group>";
+		};
+		517DF2AA18AC4C1A008980B3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				517DF2AD18AC4C1A008980B3 /* DataStores */,
+				517FD2CB18AC4C70003E1813 /* Serialization */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		517DF2AD18AC4C1A008980B3 /* DataStores */ = {
+			isa = PBXGroup;
+			children = (
+				517DF2AE18AC4C1A008980B3 /* ACCodeSnippetDataStoreProtocol.h */,
+			);
+			path = DataStores;
+			sourceTree = "<group>";
+		};
+		517FD2CB18AC4C70003E1813 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				517FD2CC18AC4C70003E1813 /* ACCodeSnippetSerialization.h */,
+				517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */,
+			);
+			path = Serialization;
 			sourceTree = "<group>";
 		};
 		518E699618AC4A8900C57456 = {
@@ -138,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				517D918D18AC4BA700A564B9 /* IDE */,
+				517DF2AA18AC4C1A008980B3 /* Classes */,
 				518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */,
 				518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */,
 				518E69A718AC4A8900C57456 /* Supporting Files */,
@@ -249,6 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				517DF2A718AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
+				517FD2D118AC4C89003E1813 /* ACCodeSnippetSerializationTests.m in Sources */,
+				517FD2CF18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
+				517DF2A918AC4BF1008980B3 /* Swizzler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +316,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				518E69AE18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m in Sources */,
+				517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
+				517DF2A818AC4BF1008980B3 /* Swizzler.m in Sources */,
+				517FD2CE18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
