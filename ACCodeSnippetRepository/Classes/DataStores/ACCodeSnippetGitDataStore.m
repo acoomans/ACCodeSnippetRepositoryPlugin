@@ -155,7 +155,9 @@
         IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
         
         if (snippet) {
-            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
+            });
         }
     }
 }
