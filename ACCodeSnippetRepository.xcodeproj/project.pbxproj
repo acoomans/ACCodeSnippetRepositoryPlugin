@@ -18,6 +18,8 @@
 		517DF2A718AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */; };
 		517DF2A818AC4BF1008980B3 /* Swizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A518AC4BF1008980B3 /* Swizzler.m */; };
 		517DF2A918AC4BF1008980B3 /* Swizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A518AC4BF1008980B3 /* Swizzler.m */; };
+		517E12C018AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 517E12BF18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m */; };
+		517E12C118AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 517E12BF18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m */; };
 		517FD2CE18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */; };
 		517FD2CF18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */; };
 		517FD2D118AC4C89003E1813 /* ACCodeSnippetSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */; };
@@ -60,6 +62,8 @@
 		517DF2A418AC4BF1008980B3 /* Swizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swizzler.h; sourceTree = "<group>"; };
 		517DF2A518AC4BF1008980B3 /* Swizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Swizzler.m; sourceTree = "<group>"; };
 		517DF2AE18AC4C1A008980B3 /* ACCodeSnippetDataStoreProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetDataStoreProtocol.h; sourceTree = "<group>"; };
+		517E12BE18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetGitDataStore.h; sourceTree = "<group>"; };
+		517E12BF18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetGitDataStore.m; sourceTree = "<group>"; };
 		517FD2CC18AC4C70003E1813 /* ACCodeSnippetSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetSerialization.h; sourceTree = "<group>"; };
 		517FD2CD18AC4C70003E1813 /* ACCodeSnippetSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetSerialization.m; sourceTree = "<group>"; };
 		517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetSerializationTests.m; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				517DF2AE18AC4C1A008980B3 /* ACCodeSnippetDataStoreProtocol.h */,
+				517E12BE18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.h */,
+				517E12BF18AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 				51010E0318AC5CB1000AA1F1 /* ACGitRepository.m in Sources */,
 				517DF2A718AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
 				517FD2D118AC4C89003E1813 /* ACCodeSnippetSerializationTests.m in Sources */,
+				517E12C118AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */,
 				517FD2CF18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
 				5105B22818AC59520066728E /* NSTask+Extras.m in Sources */,
 				51D2D55518AC590000493579 /* NSString+Path.m in Sources */,
@@ -351,6 +358,7 @@
 				51010E0218AC5CB1000AA1F1 /* ACGitRepository.m in Sources */,
 				518E69AE18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m in Sources */,
 				517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
+				517E12C018AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */,
 				517DF2A818AC4BF1008980B3 /* Swizzler.m in Sources */,
 				517FD2CE18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
 				5105B22718AC59520066728E /* NSTask+Extras.m in Sources */,

@@ -27,7 +27,7 @@
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = path;
     task.arguments = arguments;
-    task.currentDirectoryPath = directoryPath;
+    if (directoryPath) task.currentDirectoryPath = directoryPath;
     //task.standardOutput = task.standardError = pipe;
     task.standardOutput = pipe;
     [task launch];

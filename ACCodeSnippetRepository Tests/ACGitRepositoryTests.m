@@ -15,8 +15,16 @@
 @implementation ACGitRepositoryTests
 
 - (void)testExample {
-    ACGitRepository *git = [[ACGitRepository alloc] init];
     
+    NSURL *gitURL = [NSURL URLWithString:@"git@github.com:acoomans/test.git"];
+    
+    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *gitPath = [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets", @"git"]];
+    
+    ACGitRepository *git = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:gitPath];
+    
+    [git forkRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
+    //[git removeLocalRepository];
     
 }
 

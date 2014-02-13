@@ -42,10 +42,6 @@
     }
 }
 
-- (void)forkRemoteRepository {
-    [self forkRemoteRepositoryWithURL:self.remoteRepositoryURL inDirectory:self.localRepositoryPath];
-}
-
 - (void)forkRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath {
     if (
         ![[NSFileManager defaultManager] fileExistsAtPath:localRepositoryPath] &&
@@ -58,7 +54,6 @@
                          standardOutputAndError:&output];
         self.taskLog = [self.taskLog stringByAppendingString:output];
         
-        self.remoteRepositoryURL = remoteRepositoryURL;
         self.localRepositoryPath = localRepositoryPath;
     }
 }
@@ -123,6 +118,13 @@
     [self pull];
     [self commit];
     [self push];
+}
+
+- (void)removeLocalRepository {
+    if (![self localRepositoryExists]) return;
+    
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:self.localRepositoryPath error:&error];
 }
 
 @end

@@ -10,8 +10,7 @@
 
 @interface ACGitRepository : NSObject
 
-@property (nonatomic, strong) NSURL *remoteRepositoryURL;
-@property (nonatomic, strong) NSString *localRepositoryPath;
+@property (nonatomic, copy) NSString *localRepositoryPath;
 @property (nonatomic, copy) NSString *taskLog;
 
 - (instancetype)initWithLocalRepositoryDirectory:(NSString*)localRepositoryPath;
@@ -21,7 +20,6 @@
 - (void)initializeLocalRepository;
 - (void)initializeLocalRepositoryInDirectory:(NSString*)localRepositoryPath;
 
-- (void)forkRemoteRepository;
 - (void)forkRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath;
 
 - (void)commit;
@@ -29,5 +27,7 @@
 - (void)push;
 
 - (void)updateLocalWithRemoteRepository;
+
+- (void)removeLocalRepository;
 
 @end
