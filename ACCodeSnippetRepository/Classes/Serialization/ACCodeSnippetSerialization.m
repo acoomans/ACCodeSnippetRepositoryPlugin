@@ -36,7 +36,13 @@ NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
     [string appendString:@"//\n"];
     
     for (NSString *key in dict.keyEnumerator) {
-        [string appendFormat:@"// %@: %@\n", key, dict[key]];
+        
+        id value = dict[key];
+        
+        if ([value isKindOfClass:NSArray.class]) {
+            value = [NSString stringWithFormat:@"[%@]", [value componentsJoinedByString:@","]];
+        }
+        [string appendFormat:@"// %@: %@\n", key, value];
     }
     
     [string appendString:@"\n"];
@@ -72,14 +78,19 @@ NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
         
         if (isParsingHeader) {
             __block NSString *key = nil;
-            __block NSString *value = nil;
+            __block id value = nil;
             [regex enumerateMatchesInString:line
                                     options:0
                                       range:NSMakeRange(0, line.length)
                                  usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                                      
                                      key = [line substringWithRange:[result rangeAtIndex:1]];
-                                     value = [line substringWithRange:[result rangeAtIndex:2]];
+                                     value = [[line substringWithRange:[result rangeAtIndex:2]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                                     
+                                     if ([value hasPrefix:@"["] && [value hasSuffix:@"]"]) {
+                                         value = [[value substringWithRange:NSMakeRange(1, [value length]-2)] componentsSeparatedByString:@","];
+                                     }
+                                     
                                      dict[key] = value;
                                  }];
             

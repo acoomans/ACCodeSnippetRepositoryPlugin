@@ -21,6 +21,7 @@
                            ACCodeSnippetSummaryKey: @"summary",
                            ACCodeSnippetContentsKey: @"content",
                            @"WhateverKey": @"WhateverValue",
+                           @"Array": @[@"one", @"two"],
                            };
     
     NSData *data = [ACCodeSnippetSerialization dataWithDictionary:dict
@@ -35,11 +36,13 @@
     STAssertTrue([string rangeOfString:@"content"].location != NSNotFound, nil);
     STAssertTrue([string rangeOfString:@"WhateverKey"].location != NSNotFound, nil);
     STAssertTrue([string rangeOfString:@"WhateverValue"].location != NSNotFound, nil);
+    
+    STAssertTrue([string rangeOfString:@"one"].location != NSNotFound, nil);
+    STAssertTrue([string rangeOfString:@"two"].location != NSNotFound, nil);
 }
 
-
 - (void)testDeserialize {
-    NSString *string = @"// title\n// summary\n//\n// WhateverKey: WhateverValue\ncontents\n";
+    NSString *string = @"// title\n// summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\ncontents\n";
     
     NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:[string dataUsingEncoding:NSUTF8StringEncoding]
                                                                 options:0
@@ -51,6 +54,9 @@
     STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
     STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"contents"], nil);
     STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
+    
+    NSArray *a = @[@"one", @"two"];
+    STAssertTrue([dict[@"Array"] isEqualToArray:a], nil);
 }
 
 - (void)testSerializeDeserialize {
@@ -60,6 +66,7 @@
                            ACCodeSnippetSummaryKey: @"summary",
                            ACCodeSnippetContentsKey: @"content",
                            @"WhateverKey": @"WhateverValue",
+                           @"Array": @[@"one", @"two"],
                            };
     
     NSData *data = [ACCodeSnippetSerialization dataWithDictionary:dict1
