@@ -7,13 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
+		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
 		518E69A318AC4A8900C57456 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E69A218AC4A8900C57456 /* AppKit.framework */; };
 		518E69A518AC4A8900C57456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E69A418AC4A8900C57456 /* Foundation.framework */; };
 		518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 518E69A918AC4A8900C57456 /* InfoPlist.strings */; };
 		518E69AE18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5154068F18AC4B500065CA33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 518E699718AC4A8900C57456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 518E699E18AC4A8900C57456;
+			remoteInfo = ACCodeSnippetRepository;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACCodeSnippetRepository Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5154068418AC4B500065CA33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACCodeSnippetRepository Tests-Info.plist"; sourceTree = "<group>"; };
+		5154068A18AC4B500065CA33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository Tests-Prefix.pch"; sourceTree = "<group>"; };
 		518E699F18AC4A8900C57456 /* ACCodeSnippetRepository.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACCodeSnippetRepository.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		518E69A218AC4A8900C57456 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		518E69A418AC4A8900C57456 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -25,6 +42,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5154068018AC4B500065CA33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		518E699C18AC4A8900C57456 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +62,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5154068618AC4B500065CA33 /* ACCodeSnippetRepository Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5154068718AC4B500065CA33 /* Supporting Files */,
+			);
+			path = "ACCodeSnippetRepository Tests";
+			sourceTree = "<group>";
+		};
+		5154068718AC4B500065CA33 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */,
+				5154068918AC4B500065CA33 /* InfoPlist.strings */,
+				5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		518E699618AC4A8900C57456 = {
 			isa = PBXGroup;
 			children = (
 				518E69A618AC4A8900C57456 /* ACCodeSnippetRepository */,
+				5154068618AC4B500065CA33 /* ACCodeSnippetRepository Tests */,
 				518E69A118AC4A8900C57456 /* Frameworks */,
 				518E69A018AC4A8900C57456 /* Products */,
 			);
@@ -50,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				518E699F18AC4A8900C57456 /* ACCodeSnippetRepository.xcplugin */,
+				5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,6 +104,7 @@
 			children = (
 				518E69A218AC4A8900C57456 /* AppKit.framework */,
 				518E69A418AC4A8900C57456 /* Foundation.framework */,
+				5154068418AC4B500065CA33 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -86,6 +132,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5154068218AC4B500065CA33 /* ACCodeSnippetRepository Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5154069318AC4B500065CA33 /* Build configuration list for PBXNativeTarget "ACCodeSnippetRepository Tests" */;
+			buildPhases = (
+				5154067F18AC4B500065CA33 /* Sources */,
+				5154068018AC4B500065CA33 /* Frameworks */,
+				5154068118AC4B500065CA33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5154069018AC4B500065CA33 /* PBXTargetDependency */,
+			);
+			name = "ACCodeSnippetRepository Tests";
+			productName = "ACCodeSnippetRepository Tests";
+			productReference = 5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		518E699E18AC4A8900C57456 /* ACCodeSnippetRepository */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 518E69B218AC4A8900C57456 /* Build configuration list for PBXNativeTarget "ACCodeSnippetRepository" */;
@@ -111,6 +175,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Arnaud Coomans";
+				TargetAttributes = {
+					5154068218AC4B500065CA33 = {
+						TestTargetID = 518E699E18AC4A8900C57456;
+					};
+				};
 			};
 			buildConfigurationList = 518E699A18AC4A8900C57456 /* Build configuration list for PBXProject "ACCodeSnippetRepository" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -125,11 +194,20 @@
 			projectRoot = "";
 			targets = (
 				518E699E18AC4A8900C57456 /* ACCodeSnippetRepository */,
+				5154068218AC4B500065CA33 /* ACCodeSnippetRepository Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5154068118AC4B500065CA33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		518E699D18AC4A8900C57456 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +219,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5154067F18AC4B500065CA33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		518E699B18AC4A8900C57456 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,7 +236,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5154069018AC4B500065CA33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 518E699E18AC4A8900C57456 /* ACCodeSnippetRepository */;
+			targetProxy = 5154068F18AC4B500065CA33 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		5154068918AC4B500065CA33 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5154068A18AC4B500065CA33 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		518E69A918AC4A8900C57456 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -163,6 +264,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5154069118AC4B500065CA33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5154069218AC4B500065CA33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Prefix.pch";
+				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		518E69B018AC4A8900C57456 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -264,6 +399,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5154069318AC4B500065CA33 /* Build configuration list for PBXNativeTarget "ACCodeSnippetRepository Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5154069118AC4B500065CA33 /* Debug */,
+				5154069218AC4B500065CA33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		518E699A18AC4A8900C57456 /* Build configuration list for PBXProject "ACCodeSnippetRepository" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -280,6 +423,7 @@
 				518E69B418AC4A8900C57456 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
