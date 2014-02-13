@@ -31,6 +31,11 @@
 		5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACCodeSnippetRepository Tests-Info.plist"; sourceTree = "<group>"; };
 		5154068A18AC4B500065CA33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository Tests-Prefix.pch"; sourceTree = "<group>"; };
+		517D918E18AC4BA700A564B9 /* classdump.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = classdump.txt; sourceTree = "<group>"; };
+		517D919018AC4BA700A564B9 /* IDE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDE.h; sourceTree = "<group>"; };
+		517D919118AC4BA700A564B9 /* IDECodeSnippet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippet.h; sourceTree = "<group>"; };
+		517D919218AC4BA700A564B9 /* IDECodeSnippetLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippetLibrary.h; sourceTree = "<group>"; };
+		517D919318AC4BA700A564B9 /* IDECodeSnippetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDECodeSnippetRepository.h; sourceTree = "<group>"; };
 		518E699F18AC4A8900C57456 /* ACCodeSnippetRepository.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACCodeSnippetRepository.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		518E69A218AC4A8900C57456 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		518E69A418AC4A8900C57456 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,6 +85,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		517D918D18AC4BA700A564B9 /* IDE */ = {
+			isa = PBXGroup;
+			children = (
+				517D918E18AC4BA700A564B9 /* classdump.txt */,
+				517D918F18AC4BA700A564B9 /* Headers */,
+			);
+			path = IDE;
+			sourceTree = "<group>";
+		};
+		517D918F18AC4BA700A564B9 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				517D919018AC4BA700A564B9 /* IDE.h */,
+				517D919118AC4BA700A564B9 /* IDECodeSnippet.h */,
+				517D919218AC4BA700A564B9 /* IDECodeSnippetLibrary.h */,
+				517D919318AC4BA700A564B9 /* IDECodeSnippetRepository.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		518E699618AC4A8900C57456 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +137,7 @@
 		518E69A618AC4A8900C57456 /* ACCodeSnippetRepository */ = {
 			isa = PBXGroup;
 			children = (
+				517D918D18AC4BA700A564B9 /* IDE */,
 				518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */,
 				518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */,
 				518E69A718AC4A8900C57456 /* Supporting Files */,
@@ -406,6 +432,7 @@
 				5154069218AC4B500065CA33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		518E699A18AC4A8900C57456 /* Build configuration list for PBXProject "ACCodeSnippetRepository" */ = {
 			isa = XCConfigurationList;
