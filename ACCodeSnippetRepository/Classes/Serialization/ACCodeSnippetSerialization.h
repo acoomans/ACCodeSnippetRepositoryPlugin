@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const ACCodeSnippetIdentifierKey;
 extern NSString * const ACCodeSnippetTitleKey;
 extern NSString * const ACCodeSnippetSummaryKey;
 extern NSString * const ACCodeSnippetContentsKey;
+extern NSString * const ACCodeSnippetUserSnippetKey;
+extern NSString * const ACCodeSnippetLanguageKey;
+
+extern NSString * const ACCodeSnippetLanguageObjectiveC;
 
 
 typedef NS_ENUM(NSUInteger, ACCodeSnippetSerializationFormat) {

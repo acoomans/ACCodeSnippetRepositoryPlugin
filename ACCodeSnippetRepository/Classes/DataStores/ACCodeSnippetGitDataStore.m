@@ -150,14 +150,20 @@
         
         NSData *data = [NSData dataWithContentsOfFile:path];
         NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
-        IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
         
-        IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
-        
-        if (snippet) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
-            });
+        if (dict[ACCodeSnippetIdentifierKey]) {
+            
+            // we need the snippet identifier
+            IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+            
+            // be sure to remove the snippet actually in the repository
+            IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
+            
+            if (snippet) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
+                });
+            }
         }
     }
 }
@@ -169,16 +175,26 @@
         
         NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
         
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
         
-        IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
-
-        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addCodeSnippet:snippet];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] override_saveUserCodeSnippetToDisk:snippet];
-        });
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
+            
+            if (!dict[ACCodeSnippetTitleKey]) {
+                NSMutableDictionary *mutableDict = [dict mutableCopy];
+                mutableDict[ACCodeSnippetTitleKey] = [filename stringByDeletingPathExtension];
+                dict = mutableDict;
+            }
+            
+            IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+            
+            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addCodeSnippet:snippet];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // (not calling the overriden version) this will re-save the snippet with Xcode's metadata
+                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] saveUserCodeSnippetToDisk:snippet];
+            });
+        }
     }
 }
 

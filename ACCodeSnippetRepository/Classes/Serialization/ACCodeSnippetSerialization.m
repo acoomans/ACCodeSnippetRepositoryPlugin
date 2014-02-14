@@ -8,9 +8,14 @@
 
 #import "ACCodeSnippetSerialization.h"
 
+NSString * const ACCodeSnippetIdentifierKey = @"IDECodeSnippetIdentifier";
 NSString * const ACCodeSnippetTitleKey = @"IDECodeSnippetTitle";
 NSString * const ACCodeSnippetSummaryKey = @"IDECodeSnippetSummary";
 NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
+NSString * const ACCodeSnippetUserSnippetKey = @"IDECodeSnippetUserSnippet";
+NSString * const ACCodeSnippetLanguageKey = @"IDECodeSnippetLanguage";
+
+NSString * const ACCodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.Objective-C";
 
 
 @implementation ACCodeSnippetSerialization
@@ -60,8 +65,12 @@ NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
     
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    NSMutableDictionary *dict = [@{} mutableCopy];
-    
+    NSMutableDictionary *dict = [@{
+                                   ACCodeSnippetIdentifierKey: [self identifier],
+                                   ACCodeSnippetUserSnippetKey: @(YES),
+                                   ACCodeSnippetLanguageKey: ACCodeSnippetLanguageObjectiveC,
+                                   } mutableCopy];
+
     __block BOOL isParsingHeader = YES;
     __block NSString *contents = @"";
     
@@ -91,6 +100,14 @@ NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
                                          value = [[value substringWithRange:NSMakeRange(1, [value length]-2)] componentsSeparatedByString:@","];
                                      }
                                      
+                                     if ([@"title|name" rangeOfString:[key lowercaseString]].location != NSNotFound) {
+                                         key = ACCodeSnippetTitleKey;
+                                     }
+                                     
+                                     if ([@"description|summary" rangeOfString:[key lowercaseString]].location != NSNotFound) {
+                                         key = ACCodeSnippetSummaryKey;
+                                     }
+                                     
                                      dict[key] = value;
                                  }];
             
@@ -116,6 +133,17 @@ NSString * const ACCodeSnippetContentsKey = @"IDECodeSnippetContents";
     dict[ACCodeSnippetContentsKey] = contents;
     
     return [dict copy];
+}
+
+#pragma mark - 
+
++ (NSString*)identifier {
+    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef strRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
+    NSString *uuidString = [NSString stringWithString:(__bridge NSString*)strRef];
+    CFRelease(strRef);
+    CFRelease(uuidRef);
+    return uuidString;
 }
 
 @end

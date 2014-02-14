@@ -59,6 +59,24 @@
     STAssertTrue([dict[@"Array"] isEqualToArray:a], nil);
 }
 
+- (void)testDeserialize2 {
+    NSString *string = @"// Title: title\n// Summary: summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\ncontents\n";
+    
+    NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:[string dataUsingEncoding:NSUTF8StringEncoding]
+                                                                options:0
+                                                                 format:ACCodeSnippetSerializationFormatC
+                                                                  error:nil];
+    NSLog(@"\n%@", dict);
+    
+    STAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"], nil);
+    STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
+    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"contents"], nil);
+    STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
+    
+    NSArray *a = @[@"one", @"two"];
+    STAssertTrue([dict[@"Array"] isEqualToArray:a], nil);
+}
+
 - (void)testSerializeDeserialize {
 
     NSDictionary *dict1 = @{
