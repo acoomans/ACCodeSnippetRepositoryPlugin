@@ -27,6 +27,42 @@ NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
     return self;
 }
 
+- (NSURL*)remoteRepositoryURL {
+    if (![self localRepositoryExists]) return nil;
+    
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/bin/git";
+    task.arguments = @[@"remote", @"-v"];
+    task.currentDirectoryPath = self.localRepositoryPath;
+    task.standardOutput = pipe;
+    [task launch];
+    [task waitUntilExit];
+    
+    NSData *data = [[pipe fileHandleForReading] availableData];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (array.count > 2) {
+        return [NSURL URLWithString:array[1]];
+    }
+    
+    return nil;
+}
+
+- (void)setRemoteRepositoryURL:(NSURL *)remoteRepositoryURL {
+    if (![self localRepositoryExists]) return;
+    
+    NSString *output;
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"remote", @"set-url", @"origin", remoteRepositoryURL.absoluteString]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
+}
+
+
 - (BOOL)localRepositoryExists {
     return [[NSFileManager defaultManager] fileExistsAtPath:self.localRepositoryPath];
 }

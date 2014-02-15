@@ -38,4 +38,6 @@ typedef NSUInteger ACCodeSnippetSerializationReadOptions;
                   format:(ACCodeSnippetSerializationFormat)format
                    error:(NSError**)error;
 
++ (NSString*)identifier;
+
 @end

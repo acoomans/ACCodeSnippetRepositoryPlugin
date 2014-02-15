@@ -16,7 +16,7 @@
 
 - (void)testExample {
     
-    //NSURL *gitURL = [NSURL URLWithString:@"git@github.com:acoomans/test.git"];
+    NSURL *gitURL = [NSURL URLWithString:@"git@github.com:acoomans/test.git"];
     
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
     NSString *gitPath = [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets", @"git"]];
@@ -25,8 +25,11 @@
     
     //[git forkRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
     //[git removeLocalRepository];
-    NSLog(@"%@", [git identifierForCurrentCommit]);
-    NSLog(@"%@", [git changedFilesSinceCommitWithIdentifier:@"HEAD~6"]);
+    //NSLog(@"%@", [git identifierForCurrentCommit]);
+    //NSLog(@"%@", [git changedFilesSinceCommitWithIdentifier:@"HEAD~6"]);
+    
+    git.remoteRepositoryURL = gitURL;
+    NSLog(@"%@", [git remoteRepositoryURL]);
     
 }
 

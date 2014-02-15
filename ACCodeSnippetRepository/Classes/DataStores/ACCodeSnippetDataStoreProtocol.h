@@ -11,8 +11,19 @@
 
 @protocol ACCodeSnippetDataStoreProtocol <NSObject>
 
+- (NSOperationQueue*)mainQueue;
+
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)updateCodeSnippets;
+
+- (void)removeAllCodeSnippets;
+- (void)importCodeSnippets;
+
+@optional
+- (void)dataStoreWillAdd;
+- (void)dataStoreDidAdd;
+- (void)dataStoreWillRemove;
+- (void)dataStoreDidRemove;
 
 @end

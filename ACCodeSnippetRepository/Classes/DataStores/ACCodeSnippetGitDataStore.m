@@ -14,6 +14,18 @@
 
 @implementation ACCodeSnippetGitDataStore
 
+- (instancetype)init {
+    return [self initWithRemoteRepositoryURL:nil];
+}
+
+- (id)initWithRemoteRepositoryURL:(NSURL*)remoteRepositoryURL {
+    ACGitRepository *gitRepository = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:self.localRepositoryPath];
+    if (remoteRepositoryURL && !gitRepository.localRepositoryExists) {
+        [gitRepository forkRemoteRepositoryWithURL:remoteRepositoryURL inDirectory:self.localRepositoryPath];
+    }
+    return [self initWithGitRepository:gitRepository];
+}
+
 - (id)initWithGitRepository:(ACGitRepository*)gitRepository {
     self = [super init];
     if (self) {
@@ -26,15 +38,43 @@
 
 #pragma mark - Properties
 
+- (void)dataStoreWillAdd {
+    if (![self.gitRepository localRepositoryExists]) {
+        [self.gitRepository forkRemoteRepositoryWithURL:self.remoteRepositoryURL inDirectory:self.localRepositoryPath];
+    }
+}
+
+- (void)dataStoreDidAdd {
+    self.mainQueue.suspended = NO;
+}
+
+- (void)dataStoreWillRemove {
+    self.mainQueue.suspended = YES;
+    [self.mainQueue waitUntilAllOperationsAreFinished];
+}
+
+- (void)dataStoreDidRemove {
+    [self.gitRepository removeLocalRepository];
+}
+
 - (void)setGitRepository:(ACGitRepository *)gitRepository {
     _gitRepository = gitRepository;
     gitRepository.localRepositoryPath = self.localRepositoryPath;
 }
 
+- (NSURL*)remoteRepositoryURL {
+    return self.gitRepository.remoteRepositoryURL;
+}
+
+- (void)setRemoteRepositoryURL:(NSURL *)remoteRepositoryURL {
+    self.gitRepository.remoteRepositoryURL = remoteRepositoryURL;
+}
 
 #pragma mark - ACCodeSnippetDataStoreProtocol
 
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet {
+    if (!self.gitRepository) return;
+    
     NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore addCodeSnippet: %@", snippet);
     
     __block IDECodeSnippet *blockSnippet = snippet;
@@ -42,8 +82,8 @@
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
         if (![blockSnippet.title isEqualToString:@"My Code Snippet"]) {
-            [weakSelf removeAllFilesForSnippet:blockSnippet];
-            [weakSelf addFileForSnippet:blockSnippet];
+            [weakSelf removeAllFilesInLocalRepositoryForSnippet:blockSnippet];
+            [weakSelf addFileInLocalRepositoryForSnippet:blockSnippet];
             [weakSelf.gitRepository commit];
             [weakSelf.gitRepository push];
         }
@@ -53,13 +93,15 @@
 }
 
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet {
+    if (!self.gitRepository) return;
+    
     NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore removeCodeSnippet: %@", snippet);
     
     __block IDECodeSnippet *blockSnippet = snippet;
     __weak ACCodeSnippetGitDataStore *weakSelf = self;
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
-        [weakSelf removeAllFilesForSnippet:blockSnippet];
+        [weakSelf removeAllFilesInLocalRepositoryForSnippet:blockSnippet];
         [weakSelf.gitRepository commit];
         [weakSelf.gitRepository push];
     }];
@@ -67,6 +109,8 @@
 }
 
 - (void)updateCodeSnippets {
+    if (!self.gitRepository) return;
+    
     NSLog(@"ACCodeSnippetRepositoryPlugin -- GitDataStore updateCodeSnippets");
     
     __weak ACCodeSnippetGitDataStore *weakSelf = self;
@@ -76,13 +120,13 @@
         
         NSMutableDictionary *changes = [[weakSelf.gitRepository changedFilesWithOrigin] mutableCopy];
         
-        [weakSelf updateDeletedFiles:changes[ACGitRepositoryFileChangeDeletedKey]];
-        [weakSelf updateDeletedFiles:changes[ACGitRepositoryFileChangeModifiedKey]];
+        [weakSelf removeSnippetsForFilesInLocalRepository:changes[ACGitRepositoryFileChangeDeletedKey]];
+        [weakSelf removeSnippetsForFilesInLocalRepository:changes[ACGitRepositoryFileChangeModifiedKey]];
         
         [weakSelf.gitRepository pull];
         
-        [weakSelf updateAddedFiles:changes[ACGitRepositoryFileChangeAddedKey]];
-        [weakSelf updateAddedFiles:changes[ACGitRepositoryFileChangeModifiedKey]];
+        [weakSelf updateSnippetsForFilesInLocalRepository:changes[ACGitRepositoryFileChangeAddedKey]];
+        [weakSelf updateSnippetsForFilesInLocalRepository:changes[ACGitRepositoryFileChangeModifiedKey]];
         
         [weakSelf.gitRepository commit];
         [weakSelf.gitRepository push];
@@ -90,10 +134,26 @@
     [self.mainQueue addOperation:blockOperation];
 }
 
+- (void)removeAllCodeSnippets {
+    NSError *error = nil;
+    
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.localRepositoryPath
+                                                                             error:&error];
+    [self removeSnippetsForFilesInLocalRepository:filenames];
+}
+
+- (void)importCodeSnippets {
+    NSError *error = nil;
+    
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.localRepositoryPath
+                                                                             error:&error];
+    [self updateSnippetsForFilesInLocalRepository:filenames];
+
+}
 
 #pragma mark - file operations
 
-- (void)addFileForSnippet:(IDECodeSnippet*)snippet {
+- (void)addFileInLocalRepositoryForSnippet:(IDECodeSnippet*)snippet {
     NSData *data = [ACCodeSnippetSerialization dataWithDictionary:[snippet dictionaryRepresentation]
                                                            format:0
                                                           options:0
@@ -105,22 +165,19 @@
     [data writeToFile:textPath atomically:YES];
 }
 
-- (void)removeAllFilesForSnippet:(IDECodeSnippet*)snippet {
+- (void)removeAllFilesInLocalRepositoryForSnippet:(IDECodeSnippet*)snippet {
     
     NSError *error = nil;
-    for (NSString *textFilename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.localRepositoryPath
+    for (NSString *filename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.localRepositoryPath
                                                                                        error:&error]) {
         
-        NSString *textPath = [self.localRepositoryPath stringByAppendingPathComponent:textFilename];
+        NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
         
-        BOOL isDirectory;
-        [[NSFileManager defaultManager] fileExistsAtPath:textPath isDirectory:&isDirectory];
-        
-        if (!isDirectory && ![textFilename hasPrefix:@"."]) {
+        if ([self isSnippetFileAtPath:path]) {
             
-            NSString *s = [NSString stringWithContentsOfFile:textPath encoding:NSUTF8StringEncoding error:&error];
+            NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
             if ([s rangeOfString:snippet.identifier].location != NSNotFound) {
-                [[NSFileManager defaultManager] removeItemAtPath:textPath error:&error];
+                [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
             }
         }
     }
@@ -141,48 +198,58 @@
 
 #pragma mark -
 
-- (void)updateDeletedFiles:(NSArray*)array {
+- (void)removeSnippetsForFilesInLocalRepository:(NSArray*)array {
     NSError *error;
     
     for (NSString *filename in array) {
         
         NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
         
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
-        
-        if (dict[ACCodeSnippetIdentifierKey]) {
+        if ([self isSnippetFileAtPath:path]) {
             
-            // we need the snippet identifier
-            IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
             
-            // be sure to remove the snippet actually in the repository
-            IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
-            
-            if (snippet) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
-                });
+            if (dict[ACCodeSnippetIdentifierKey]) {
+                
+                // we need the snippet identifier
+                IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+                
+                // be sure to remove the snippet actually in the repository
+                IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
+                
+                if (snippet) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeCodeSnippet:snippet];
+                    });
+                }
             }
+            
         }
     }
 }
 
-- (void)updateAddedFiles:(NSArray*)array {
+- (void)updateSnippetsForFilesInLocalRepository:(NSArray*)array {
     NSError *error;
     
     for (NSString *filename in array) {
         
         NSString *path = [self.localRepositoryPath stringByAppendingPathComponent:filename];
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
-        
+        if ([self isSnippetFileAtPath:path]) {
+            
             NSData *data = [NSData dataWithContentsOfFile:path];
             NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:data options:0 format:0 error:&error];
             
             if (!dict[ACCodeSnippetTitleKey]) {
                 NSMutableDictionary *mutableDict = [dict mutableCopy];
                 mutableDict[ACCodeSnippetTitleKey] = [filename stringByDeletingPathExtension];
+                dict = mutableDict;
+            }
+
+            if (!dict[ACCodeSnippetIdentifierKey]) {
+                NSMutableDictionary *mutableDict = [dict mutableCopy];
+                mutableDict[ACCodeSnippetIdentifierKey] = [ACCodeSnippetSerialization identifier];
                 dict = mutableDict;
             }
             
@@ -196,6 +263,27 @@
             });
         }
     }
+}
+
+- (BOOL)isSnippetFileAtPath:(NSString*)path {
+    
+    NSString *filename = [path lastPathComponent];
+    
+    BOOL isDirectory;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
+    
+    return (
+            exists &&
+            !isDirectory &&
+            ![filename hasPrefix:@"."] &&
+            (
+             [filename hasSuffix:@".c"] ||
+             [filename hasSuffix:@".m"] ||
+             [filename hasSuffix:@".h"] ||
+             [filename hasSuffix:@".cpp"] ||
+             [filename hasSuffix:@".s"]
+             )
+            );
 }
 
 @end

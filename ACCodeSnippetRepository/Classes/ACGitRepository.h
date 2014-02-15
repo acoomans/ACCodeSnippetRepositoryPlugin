@@ -18,6 +18,7 @@ extern NSString * const ACGitRepositoryFileChangeUnmergedKey;
 
 @interface ACGitRepository : NSObject
 
+@property (nonatomic, copy) NSURL *remoteRepositoryURL;
 @property (nonatomic, copy) NSString *localRepositoryPath;
 @property (nonatomic, copy) NSString *taskLog;
 

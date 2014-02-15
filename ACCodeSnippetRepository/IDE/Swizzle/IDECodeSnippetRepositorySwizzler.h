@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSArray *dataStores;
 - (void)addDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore;
+- (void)removeDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore;
 
 - (void)addCodeSnippet:(id)arg1;
 - (void)removeCodeSnippet:(id)arg1;

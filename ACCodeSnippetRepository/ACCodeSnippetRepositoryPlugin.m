@@ -19,6 +19,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 @interface ACCodeSnippetRepositoryPlugin()
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, weak) NSMenuItem *updateMenuItem;
+@property (nonatomic, strong) ACCodeSnippetRepositoryConfigurationWindowController *configurationWindowController;
 @end
 
 @implementation ACCodeSnippetRepositoryPlugin
@@ -40,11 +41,13 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         self.bundle = plugin;
         
         // add data stores to Xcode's snippet repository
-        ACGitRepository *gitRepository = [[ACGitRepository alloc] init];
-        ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] initWithGitRepository:gitRepository];
+        ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] init];
         [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
         
-        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:gitDataStore];
+        //TODO: add multiple datastores
+        IDECodeSnippetRepository *codeSnippetRepository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
+        [codeSnippetRepository addDataStore:gitDataStore];
+        [codeSnippetRepository addObserver:self forKeyPath:@"dataStores" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
         
         // Create menu items, initialize UI, etc.
         NSMenu *pluginMenu = [self pluginMenu];
@@ -58,7 +61,11 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
-            [pluginMenu addItem:[NSMenuItem separatorItem]];
+            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippet repositories" action:@selector(configureAction:) keyEquivalent:@""];
+            actionMenuItem.target = self;
+            [pluginMenu addItem:actionMenuItem];
+            
+            //[pluginMenu addItem:[NSMenuItem separatorItem]];
         }
         
     }
@@ -89,14 +96,34 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     return pluginMenu;
 }
 
-// Sample Action, for menu item:
 - (void)updateAction:(id)sender {
-    
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores]) {
         [dataStore updateCodeSnippets];
     }
 }
 
+
+- (void)configureAction:(id)sender {
+    self.configurationWindowController = [[ACCodeSnippetRepositoryConfigurationWindowController alloc] initWithWindowNibName:NSStringFromClass(ACCodeSnippetRepositoryConfigurationWindowController.class)];
+    self.configurationWindowController.delegate = self;
+    self.configurationWindowController.window.delegate = self;
+    [self.configurationWindowController.window makeKeyWindow];
+}
+
+
+#pragma mark - NSWindowDelegate
+
+- (void)windowWillClose:(NSNotification *)notification {
+    
+    if (notification.object == self.configurationWindowController.window) {
+        self.configurationWindowController = nil;
+    }
+    
+    /*
+    if (notification.object == self.logWindowController.window) {
+        self.logWindowController = nil;
+    }*/
+}
 
 #pragma mark - NSKeyValueObserving
 
@@ -104,14 +131,33 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     
     if ([keyPath isEqualToString:@"mainQueue.operationCount"]) {
         
+        IDECodeSnippetRepository *codeSnippetRepository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
+        
         if ([[object valueForKeyPath:keyPath] integerValue] > 0) {
             self.updateMenuItem.title = @"Updating snippets...";
             self.updateMenuItem.enabled = NO;
-        } else {
+            
+        } else if ([[codeSnippetRepository.dataStores valueForKeyPath:@"@sum.mainQueue.operationCount"] integerValue] == 0) {
             self.updateMenuItem.title = @"Update snippets";
             self.updateMenuItem.enabled = YES;
         }
+        
+    } else if ([keyPath isEqualToString:@"dataStores"]) {
+        
+        for (id dataStore in change[NSKeyValueChangeOldKey]) {
+            [dataStore removeObserver:self forKeyPath:@"mainQueue.operationCount"];
+        }
+        
+        for (id dataStore in change[NSKeyValueChangeNewKey]) {
+            [dataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
+        }
     }
+}
+
+#pragma mark - ACCodeSnippetRepositoryConfigurationWindowControllerDelegate
+
+- (NSArray*)dataStoresForCodeSnippetConfigurationWindowController:(ACCodeSnippetRepositoryConfigurationWindowController*)configurationWindowController {
+    return [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores];
 }
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <AppKit/AppKit.h>
+#import "ACCodeSnippetRepositoryConfigurationWindowController.h"
 
-@interface ACCodeSnippetRepositoryPlugin : NSObject
+@interface ACCodeSnippetRepositoryPlugin : NSObject <NSWindowDelegate, ACCodeSnippetRepositoryConfigurationWindowControllerDelegate>
 
 @end

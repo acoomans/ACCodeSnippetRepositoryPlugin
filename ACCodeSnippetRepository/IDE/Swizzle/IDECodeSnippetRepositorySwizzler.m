@@ -63,12 +63,39 @@ static char const * const kIDECodeSnippetRepositorySwizzledDataStores = "kIDECod
 }
 
 - (void)override_addDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore {
+    
+    if ([dataStore respondsToSelector:@selector(dataStoreWillAdd)]) {
+        [dataStore dataStoreWillAdd];
+    }
+    
     NSMutableArray *dataStores = [[self dataStores] mutableCopy];
     if (!dataStores) {
         dataStores = [@[] mutableCopy];
     }
     [dataStores addObject:dataStore];
     [self setDataStores:dataStores];
+    
+    if ([dataStore respondsToSelector:@selector(dataStoreDidAdd)]) {
+        [dataStore dataStoreDidAdd];
+    }
+}
+
+- (void)override_removeDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore {
+    
+    if ([dataStore respondsToSelector:@selector(dataStoreWillRemove)]) {
+        [dataStore dataStoreWillRemove];
+    }
+    
+    NSMutableArray *dataStores = [[self dataStores] mutableCopy];
+    if (!dataStores) {
+        dataStores = [@[] mutableCopy];
+    }
+    [dataStores removeObject:dataStore];
+    [self setDataStores:dataStores];
+    
+    if ([dataStore respondsToSelector:@selector(dataStoreDidRemove)]) {
+        [dataStore dataStoreDidRemove];
+    }
 }
 
 @end
