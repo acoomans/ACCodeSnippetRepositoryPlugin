@@ -185,14 +185,13 @@
 
 #pragma mark -
 
-- (NSString*)snippetDirectoryPath {
+- (NSString*)pathForSnippetDirectory {
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *snippetDirectoryPath = [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
-    return snippetDirectoryPath;
+    return [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
 }
 
 - (NSString*)localRepositoryPath {
-    return [NSString pathWithComponents:@[self.snippetDirectoryPath, @"git"]];
+    return [NSString pathWithComponents:@[self.pathForSnippetDirectory, @"git"]];
 }
 
 

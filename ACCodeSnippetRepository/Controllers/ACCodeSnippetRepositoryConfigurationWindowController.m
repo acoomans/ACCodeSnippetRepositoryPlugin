@@ -65,7 +65,7 @@
 #pragma mark - Actions
 
 - (IBAction)openSnippetDirectoryAction:(id)sender {
-    [[NSWorkspace sharedWorkspace] openFile:[self snippetDirectoryPath]];
+    [[NSWorkspace sharedWorkspace] openFile:[self pathForSnippetDirectory]];
 }
 
 - (IBAction)forkRemoteRepositoryAction:(id)sender {
@@ -86,6 +86,8 @@
                 
             case NSModalResponseOK: {
                 
+                [self backupSnippets];
+                
                 [weakSelf.gitDataStore removeAllCodeSnippets];
                 [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
                 
@@ -102,12 +104,35 @@
     }];
 }
 
-#pragma mark -
+- (IBAction)backupAction:(id)sender {
+    [self backupSnippets];
+}
 
-- (NSString*)snippetDirectoryPath {
+- (void)backupSnippets {
+    NSError *error;
+    if ([[NSFileManager defaultManager] createDirectoryAtPath:self.pathForBackupDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+        for (NSString *filename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.pathForSnippetDirectory error:&error]) {
+            if ([filename hasSuffix:@".codesnippet"]) {
+                NSString *path = [NSString pathWithComponents:@[self.pathForSnippetDirectory, filename]];
+                NSString *toPath = [NSString pathWithComponents:@[self.pathForBackupDirectory, filename]];
+                [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:&error];
+            }
+        }
+    }
+}
+
+#pragma mark - Paths
+
+- (NSString*)pathForSnippetDirectory {
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *snippetDirectoryPath = [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
-    return snippetDirectoryPath;
+    return [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
+}
+
+- (NSString*)pathForBackupDirectory {
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYMMdd-HHmm"];
+    return [NSString pathWithComponents:@[self.pathForSnippetDirectory, [NSString stringWithFormat:@"backup-%@", [dateFormatter stringFromDate:currentDate]]]];
 }
 
 @end
