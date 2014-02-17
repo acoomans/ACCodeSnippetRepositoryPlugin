@@ -25,7 +25,4 @@
 @property (nonatomic, weak) IBOutlet NSPanel *forkingRemoteRepositoryPanel;
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
 
-- (IBAction)openSnippetDirectoryAction:(id)sender;
-- (IBAction)forkRemoteRepositoryAction:(id)sender;
-
 @end
