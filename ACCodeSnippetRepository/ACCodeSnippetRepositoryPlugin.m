@@ -106,11 +106,16 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 }
 
 - (void)updateAction:(id)sender {
+    [self stopTimer];
+    [self updateSnippets];
+    [self startTimer];
+}
+
+- (void)updateSnippets {
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores]) {
         [dataStore updateCodeSnippets];
     }
 }
-
 
 - (void)configureAction:(id)sender {
     self.configurationWindowController = [[ACCodeSnippetRepositoryConfigurationWindowController alloc] initWithWindowNibName:NSStringFromClass(ACCodeSnippetRepositoryConfigurationWindowController.class)];
