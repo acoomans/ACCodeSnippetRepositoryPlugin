@@ -7,6 +7,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ACCodeSnippetRepositoryConfigurationWindowController">
             <connections>
                 <outlet property="forkRemoteRepositoryButton" destination="MAO-49-Lsk" id="B6e-e1-kqg"/>
+                <outlet property="forkingRemoteRepositoryPanel" destination="bV9-kY-3j8" id="RKe-hD-gah"/>
+                <outlet property="progressIndicator" destination="3Ki-Ll-OPB" id="Aj0-Qw-9fE"/>
                 <outlet property="remoteRepositoryTextfield" destination="u6C-cv-b5i" id="cpB-ZW-kvy"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
@@ -120,6 +122,31 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
+        </window>
+        <window title="Adding Remote Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="bV9-kY-3j8" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="167" y="107" width="369" height="57"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <view key="contentView" id="5cI-54-i0V">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="3Ki-Ll-OPB">
+                        <rect key="frame" x="20" y="19" width="329" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="rtZ-NG-E3U"/>
+                        </constraints>
+                    </progressIndicator>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerX" secondItem="3Ki-Ll-OPB" secondAttribute="centerX" id="BuB-Mj-EwV"/>
+                    <constraint firstItem="3Ki-Ll-OPB" firstAttribute="leading" secondItem="5cI-54-i0V" secondAttribute="leading" constant="20" id="JU8-A6-2ks"/>
+                    <constraint firstAttribute="centerY" secondItem="3Ki-Ll-OPB" secondAttribute="centerY" id="qEP-Sa-6m0"/>
+                    <constraint firstAttribute="trailing" secondItem="3Ki-Ll-OPB" secondAttribute="trailing" constant="20" id="sSl-1i-1yj"/>
+                </constraints>
+            </view>
         </window>
     </objects>
 </document>

@@ -22,6 +22,9 @@
 @property (nonatomic, weak) IBOutlet NSTextField *remoteRepositoryTextfield;
 @property (nonatomic, weak) IBOutlet NSButton *forkRemoteRepositoryButton;
 
+@property (nonatomic, weak) IBOutlet NSPanel *forkingRemoteRepositoryPanel;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+
 - (IBAction)openSnippetDirectoryAction:(id)sender;
 - (IBAction)forkRemoteRepositoryAction:(id)sender;
 

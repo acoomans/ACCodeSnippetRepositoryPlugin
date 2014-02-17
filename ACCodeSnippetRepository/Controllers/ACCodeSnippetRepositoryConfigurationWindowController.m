@@ -69,6 +69,7 @@
 }
 
 - (IBAction)forkRemoteRepositoryAction:(id)sender {
+    
     NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to fork %@?", self.remoteRepositoryTextfield.stringValue]
                                      defaultButton:@"Fork"
                                    alternateButton:@"Cancel"
@@ -86,15 +87,26 @@
                 
             case NSModalResponseOK: {
                 
-                [self backupSnippets];
+                [self.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
+                [self.progressIndicator startAnimation:self];
                 
-                [weakSelf.gitDataStore removeAllCodeSnippets];
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
-                
-                ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:weakSelf.remoteRepositoryTextfield.stringValue]];
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
-                [dataStore importCodeSnippets];
-                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    
+                    [self backupSnippets];
+                    
+                    [weakSelf.gitDataStore removeAllCodeSnippets];
+                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
+                    
+                    ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:weakSelf.remoteRepositoryTextfield.stringValue]];
+                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
+                    [dataStore importCodeSnippets];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.window endSheet:self.forkingRemoteRepositoryPanel];
+                        [self.progressIndicator stopAnimation:self];
+                    });
+                });
+
                 break;
             }
                 
