@@ -221,8 +221,27 @@
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    
     id<ACCodeSnippetDataStoreProtocol> dataStore = self.dataStores[rowIndex];
-    return dataStore.remoteRepositoryURL;
+    
+    if ([aTableColumn.identifier isEqualToString:@"remoteRepositoryColumn"]) {
+        return dataStore.remoteRepositoryURL;
+        
+    } else if ([aTableColumn.identifier isEqualToString:@"typeColumn"]) {
+        
+        static NSImage *image;
+        if (!image) {
+            NSBundle* bundle = [NSBundle bundleForClass:self.class];
+            NSString *imagePath = [bundle pathForResource:@"Git-Icon-1788C" ofType:@"png"];
+            image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+        }
+        
+        if ([dataStore isKindOfClass:ACCodeSnippetGitDataStore.class]) {
+            return image;
+        }
+        return nil;
+    }
+    return nil;
 }
 
 @end

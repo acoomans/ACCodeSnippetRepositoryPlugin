@@ -17,7 +17,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window title="Xcode Snippet Git" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
+        <window title="Snippets Repositories Configuration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="596" y="535" width="513" height="434"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
@@ -81,7 +81,16 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="468" minWidth="10" maxWidth="3.4028234663852886e+38" id="YXO-ZW-8zZ">
+                                        <tableColumn identifier="typeColumn" width="32" minWidth="10" maxWidth="3.4028234663852886e+38" id="Uxe-Ly-wLE">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Type">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="bix-R1-DfI"/>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                        <tableColumn identifier="remoteRepositoryColumn" width="433" minWidth="10" maxWidth="3.4028234663852886e+38" id="YXO-ZW-8zZ">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote repository">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -107,7 +116,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                             <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="252" id="CAm-5I-DfU"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Bad-ks-O7f">
-                            <rect key="frame" x="1" y="2" width="0.0" height="15"/>
+                            <rect key="frame" x="1" y="191" width="471" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="NIo-OP-5k4">
