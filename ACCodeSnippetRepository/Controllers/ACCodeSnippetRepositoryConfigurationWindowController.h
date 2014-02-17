@@ -32,9 +32,10 @@
 - (IBAction)openSnippetDirectoryAction:(id)sender;
 - (IBAction)forkRemoteRepositoryAction:(id)sender;
 
-
 - (IBAction)addRemoteRepositoryAction:(id)sender;
 - (IBAction)cancelSheet:(id)sender;
 - (IBAction)deleteRemoteRepositoryAction:(id)sender;
+
+- (IBAction)openGithubAction:(id)sender;
 
 @end

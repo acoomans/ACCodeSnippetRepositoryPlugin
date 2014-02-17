@@ -46,7 +46,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="58" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNu-rM-UlG">
-                        <rect key="frame" x="18" y="20" width="477" height="58"/>
+                        <rect key="frame" x="50" y="20" width="445" height="58"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Don't hesitate to contribute and submit your pull requests at https://github.com/acoomans/ACCodeSnippetRepositoryPlugin" allowsEditingTextAttributes="YES" id="41l-Xu-n1O">
                             <font key="font" metaFont="system"/>
@@ -156,6 +156,21 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="oSA-py-KE0">
+                        <rect key="frame" x="20" y="37" width="32" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="be2-nL-6OJ"/>
+                            <constraint firstAttribute="width" constant="32" id="ld9-0n-je8"/>
+                        </constraints>
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="GitHub-Mark-64px" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="0JZ-2w-CwL">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="openGithubAction:" target="-2" id="AEi-JT-uyv"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="1r1-C1-BAk"/>
@@ -166,9 +181,11 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     <constraint firstAttribute="trailing" secondItem="wx0-Pe-4hD" secondAttribute="trailing" constant="20" id="8tN-FH-Bod"/>
                     <constraint firstItem="y7e-KZ-LfL" firstAttribute="top" secondItem="Rk9-lU-nja" secondAttribute="bottom" constant="10" id="AOp-Br-JTt"/>
                     <constraint firstAttribute="trailing" secondItem="zNu-rM-UlG" secondAttribute="trailing" constant="20" id="BS0-Tr-93K"/>
+                    <constraint firstItem="oSA-py-KE0" firstAttribute="centerY" secondItem="zNu-rM-UlG" secondAttribute="centerY" constant="-4" id="DCK-xF-Tmj"/>
                     <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="cgW-iK-lwb" secondAttribute="bottom" constant="20" id="OsZ-AM-oYS"/>
                     <constraint firstItem="wx0-Pe-4hD" firstAttribute="leading" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="10" id="PHH-nN-IEN"/>
                     <constraint firstItem="Rk9-lU-nja" firstAttribute="centerY" secondItem="SuS-hH-59H" secondAttribute="centerY" id="PSc-BJ-p4e"/>
+                    <constraint firstItem="oSA-py-KE0" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="Tja-LG-ndg"/>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="VtL-cX-twf"/>
                     <constraint firstItem="wx0-Pe-4hD" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="bJ5-69-bgh"/>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="cAc-Lg-094"/>
@@ -178,7 +195,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     <constraint firstItem="y7e-KZ-LfL" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="qGj-UL-vgm"/>
                     <constraint firstAttribute="bottom" secondItem="zNu-rM-UlG" secondAttribute="bottom" constant="20" id="qaE-Op-azO"/>
                     <constraint firstAttribute="centerX" secondItem="y7e-KZ-LfL" secondAttribute="centerX" id="tAn-dt-f2Y"/>
-                    <constraint firstItem="zNu-rM-UlG" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="zqN-1M-lme"/>
+                    <constraint firstItem="zNu-rM-UlG" firstAttribute="leading" secondItem="oSA-py-KE0" secondAttribute="trailing" id="zFq-N5-NJI"/>
                 </constraints>
             </view>
             <connections>
@@ -261,14 +278,14 @@ Gw
         <window title="Adding Remote Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Lue-eQ-ZEf" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="167" y="107" width="369" height="120"/>
+            <rect key="contentRect" x="167" y="107" width="369" height="57"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" id="keD-PD-BiU">
-                <rect key="frame" x="0.0" y="0.0" width="369" height="120"/>
+                <rect key="frame" x="0.0" y="0.0" width="369" height="57"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="kzp-P5-gUc">
-                        <rect key="frame" x="20" y="50" width="329" height="20"/>
+                        <rect key="frame" x="20" y="19" width="329" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="vQM-Aq-dcN"/>
@@ -285,6 +302,7 @@ Gw
         </window>
     </objects>
     <resources>
+        <image name="GitHub-Mark-64px" width="64" height="64"/>
         <image name="NSAddTemplate" width="8" height="8"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
     </resources>

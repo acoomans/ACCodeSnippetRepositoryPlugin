@@ -30,6 +30,9 @@
 		518E69A518AC4A8900C57456 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E69A418AC4A8900C57456 /* Foundation.framework */; };
 		518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 518E69A918AC4A8900C57456 /* InfoPlist.strings */; };
 		518E69AE18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */; };
+		519540A118B1B19F00E84644 /* GitHub-Mark-120px-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5195409E18B1B19F00E84644 /* GitHub-Mark-120px-plus.png */; };
+		519540A218B1B19F00E84644 /* GitHub-Mark-32px.png in Resources */ = {isa = PBXBuildFile; fileRef = 5195409F18B1B19F00E84644 /* GitHub-Mark-32px.png */; };
+		519540A318B1B19F00E84644 /* GitHub-Mark-64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 519540A018B1B19F00E84644 /* GitHub-Mark-64px.png */; };
 		51D2D55418AC58FD00493579 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D2D55318AC58FD00493579 /* NSString+Path.m */; };
 		51D2D55518AC590000493579 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D2D55318AC58FD00493579 /* NSString+Path.m */; };
 /* End PBXBuildFile section */
@@ -82,6 +85,9 @@
 		518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetRepositoryPlugin.h; sourceTree = "<group>"; };
 		518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetRepositoryPlugin.m; sourceTree = "<group>"; };
 		518E69AF18AC4A8900C57456 /* ACCodeSnippetRepository-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository-Prefix.pch"; sourceTree = "<group>"; };
+		5195409E18B1B19F00E84644 /* GitHub-Mark-120px-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-120px-plus.png"; sourceTree = "<group>"; };
+		5195409F18B1B19F00E84644 /* GitHub-Mark-32px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-32px.png"; sourceTree = "<group>"; };
+		519540A018B1B19F00E84644 /* GitHub-Mark-64px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-64px.png"; sourceTree = "<group>"; };
 		51D2D55218AC58FD00493579 /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
 		51D2D55318AC58FD00493579 /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +242,7 @@
 				51D2D55118AC58FD00493579 /* Categories */,
 				517DF2AA18AC4C1A008980B3 /* Classes */,
 				5162AC2618AD9FB4000109C9 /* Controllers */,
+				5195409C18B1B19F00E84644 /* Resources */,
 				518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */,
 				518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */,
 				518E69A718AC4A8900C57456 /* Supporting Files */,
@@ -251,6 +258,24 @@
 				518E69AF18AC4A8900C57456 /* ACCodeSnippetRepository-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5195409C18B1B19F00E84644 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5195409D18B1B19F00E84644 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5195409D18B1B19F00E84644 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5195409E18B1B19F00E84644 /* GitHub-Mark-120px-plus.png */,
+				5195409F18B1B19F00E84644 /* GitHub-Mark-32px.png */,
+				519540A018B1B19F00E84644 /* GitHub-Mark-64px.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		51D2D55118AC58FD00493579 /* Categories */ = {
@@ -347,8 +372,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				519540A318B1B19F00E84644 /* GitHub-Mark-64px.png in Resources */,
+				519540A218B1B19F00E84644 /* GitHub-Mark-32px.png in Resources */,
 				5162AC2B18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib in Resources */,
 				518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */,
+				519540A118B1B19F00E84644 /* GitHub-Mark-120px-plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
