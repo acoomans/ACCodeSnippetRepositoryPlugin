@@ -15,6 +15,9 @@
 		5133D0D018AC5CF900998BE2 /* ACGitRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */; };
 		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
 		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
+		515CE9DA18B1DCAA000962EA /* GitHub-Mark-120px-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */; };
+		515CE9DB18B1DCAA000962EA /* GitHub-Mark-32px.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */; };
+		515CE9DC18B1DCAA000962EA /* GitHub-Mark-64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */; };
 		5162AC2A18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5162AC2818AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m */; };
 		5162AC2B18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5162AC2918AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib */; };
 		517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */; };
@@ -56,6 +59,9 @@
 		5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACCodeSnippetRepository Tests-Info.plist"; sourceTree = "<group>"; };
 		5154068A18AC4B500065CA33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository Tests-Prefix.pch"; sourceTree = "<group>"; };
+		515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-120px-plus.png"; sourceTree = "<group>"; };
+		515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-32px.png"; sourceTree = "<group>"; };
+		515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-64px.png"; sourceTree = "<group>"; };
 		5162AC2718AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetRepositoryConfigurationWindowController.h; sourceTree = "<group>"; };
 		5162AC2818AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetRepositoryConfigurationWindowController.m; sourceTree = "<group>"; };
 		5162AC2918AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACCodeSnippetRepositoryConfigurationWindowController.xib; sourceTree = "<group>"; };
@@ -126,6 +132,24 @@
 				5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		515CE9D518B1DCAA000962EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				515CE9D618B1DCAA000962EA /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		515CE9D618B1DCAA000962EA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */,
+				515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */,
+				515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		5162AC2618AD9FB4000109C9 /* Controllers */ = {
@@ -236,6 +260,7 @@
 				51D2D55118AC58FD00493579 /* Categories */,
 				517DF2AA18AC4C1A008980B3 /* Classes */,
 				5162AC2618AD9FB4000109C9 /* Controllers */,
+				515CE9D518B1DCAA000962EA /* Resources */,
 				518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */,
 				518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */,
 				518E69A718AC4A8900C57456 /* Supporting Files */,
@@ -347,8 +372,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				515CE9DC18B1DCAA000962EA /* GitHub-Mark-64px.png in Resources */,
+				515CE9DB18B1DCAA000962EA /* GitHub-Mark-32px.png in Resources */,
 				5162AC2B18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib in Resources */,
 				518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */,
+				515CE9DA18B1DCAA000962EA /* GitHub-Mark-120px-plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,6 +133,11 @@
     }
 }
 
+- (IBAction)openGithubAction:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/acoomans/ACCodeSnippetRepositoryPlugin"]];
+}
+
+
 #pragma mark - Paths
 
 - (NSString*)pathForSnippetDirectory {
