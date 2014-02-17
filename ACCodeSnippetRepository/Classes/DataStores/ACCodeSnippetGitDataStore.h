@@ -14,9 +14,10 @@
 
 @property (nonatomic, strong) ACGitRepository *gitRepository;
 @property (nonatomic, strong) NSOperationQueue *mainQueue;
-@property (nonatomic, strong, readonly) NSString *localRepositoryPath;
 
 - (id)initWithGitRepository:(ACGitRepository*)gitRepository;
 - (id)initWithRemoteRepositoryURL:(NSURL*)remoteRepositoryURL;
+
++ (NSString*)localRepositoriesDirectory;
 
 @end

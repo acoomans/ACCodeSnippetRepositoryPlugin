@@ -34,6 +34,35 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     }
 }
 
+
+- (void)loadGitDataStores {
+    
+    IDECodeSnippetRepository *codeSnippetRepository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
+    
+    NSError *error;
+    for (NSString *filename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[ACCodeSnippetGitDataStore localRepositoriesDirectory]
+                                                                                   error:&error]) {
+        NSString *path = [NSString pathWithComponents:@[[ACCodeSnippetGitDataStore localRepositoriesDirectory], filename]];
+        BOOL isDirectory = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory]) {
+            if (isDirectory) {
+                
+                ACGitRepository *gitRepository = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:path];
+                ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] initWithGitRepository:gitRepository];
+                [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
+                
+                [codeSnippetRepository addDataStore:gitDataStore];
+                [codeSnippetRepository addObserver:self forKeyPath:@"dataStores" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+                
+            }
+        }
+    }
+}
+
+- (void)loadDataStores {
+    [self loadGitDataStores];
+}
+
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         
@@ -41,13 +70,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         self.bundle = plugin;
         
         // add data stores to Xcode's snippet repository
-        ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] init];
-        [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
-        
-        //TODO: add multiple datastores
-        IDECodeSnippetRepository *codeSnippetRepository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
-        [codeSnippetRepository addDataStore:gitDataStore];
-        [codeSnippetRepository addObserver:self forKeyPath:@"dataStores" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+        [self loadDataStores];
         
         // Create menu items, initialize UI, etc.
         NSMenu *pluginMenu = [self pluginMenu];

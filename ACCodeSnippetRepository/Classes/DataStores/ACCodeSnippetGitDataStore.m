@@ -19,9 +19,19 @@
 }
 
 - (id)initWithRemoteRepositoryURL:(NSURL*)remoteRepositoryURL {
-    ACGitRepository *gitRepository = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:self.localRepositoryPath];
+    
+    NSString *name = [remoteRepositoryURL.absoluteString lastPathComponent];
+    NSString *localRepositoryPath = [NSString pathWithComponents:@[self.class.localRepositoriesDirectory, name]];
+    
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.class.localRepositoriesDirectory
+                              withIntermediateDirectories:YES
+                                               attributes:0
+                                                    error:&error];
+    
+    ACGitRepository *gitRepository = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:localRepositoryPath];
     if (remoteRepositoryURL && !gitRepository.localRepositoryExists) {
-        [gitRepository forkRemoteRepositoryWithURL:remoteRepositoryURL inDirectory:self.localRepositoryPath];
+        [gitRepository forkRemoteRepositoryWithURL:remoteRepositoryURL inDirectory:localRepositoryPath];
     }
     return [self initWithGitRepository:gitRepository];
 }
@@ -189,13 +199,17 @@
 
 #pragma mark -
 
-- (NSString*)pathForSnippetDirectory {
++ (NSString*)pathForSnippetDirectory {
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
     return [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
 }
 
-- (NSString*)localRepositoryPath {
++ (NSString*)localRepositoriesDirectory {
     return [NSString pathWithComponents:@[self.pathForSnippetDirectory, @"git"]];
+}
+
+- (NSString*)localRepositoryPath {
+    return self.gitRepository.localRepositoryPath;
 }
 
 
