@@ -54,7 +54,7 @@
 }
 
 - (void)dataStoreDidRemove {
-    [self.gitRepository removeLocalRepository];
+    //[self.gitRepository removeLocalRepository];
 }
 
 - (void)setGitRepository:(ACGitRepository *)gitRepository {
@@ -215,7 +215,7 @@
                 IDECodeSnippet *s = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
                 
                 // be sure to remove the snippet actually in the repository
-                IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
+                __block IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] codeSnippetForIdentifier:s.identifier];
                 
                 if (snippet) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -252,7 +252,7 @@
                 dict = mutableDict;
             }
             
-            IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
+            __block IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
             
             [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addCodeSnippet:snippet];
             

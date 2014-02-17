@@ -9,6 +9,7 @@
 #import "ACCodeSnippetRepositoryConfigurationWindowController.h"
 #import "ACCodeSnippetGitDataStore.h"
 #import "IDECodeSnippetRepositorySwizzler.h"
+#import "ACCodeSnippetGitDataStore.h"
 
 
 @interface ACCodeSnippetRepositoryConfigurationWindowController ()
@@ -18,9 +19,6 @@
 @implementation ACCodeSnippetRepositoryConfigurationWindowController
 
 #pragma mark - Initialization 
-
-// fork button -> fork + import all snippets + message "do you want to import all your current snippets in your git?"
-
 
 
 - (id)initWithWindow:(NSWindow *)window {
@@ -83,6 +81,8 @@
                 
             case NSModalResponseOK: {
                 
+                __block ACCodeSnippetGitDataStore *dataStore = self.gitDataStore;
+                
                 [self.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
                 [self.progressIndicator startAnimation:self];
                 
@@ -90,8 +90,9 @@
                     
                     [self backupUserSnippets];
                     
-                    [weakSelf.gitDataStore removeAllCodeSnippets];
-                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
+                    [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:dataStore];
+                    [dataStore removeAllCodeSnippets];
+                    [dataStore.gitRepository removeLocalRepository];
                     
                     ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:weakSelf.remoteRepositoryTextfield.stringValue]];
                     [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
