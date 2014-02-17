@@ -68,14 +68,14 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5o-9c-6fF">
-                        <rect key="frame" x="20" y="202" width="473" height="212"/>
+                        <rect key="frame" x="20" y="207" width="473" height="207"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="0m3-UY-TPu">
-                            <rect key="frame" x="1" y="17" width="471" height="194"/>
+                            <rect key="frame" x="1" y="17" width="471" height="189"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="FlI-xA-lVL" id="nMN-LR-l6E">
-                                    <rect key="frame" x="0.0" y="0.0" width="471" height="194"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="471" height="189"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -205,7 +205,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                 </subviews>
                 <constraints>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="1r1-C1-BAk"/>
-                    <constraint firstItem="Rk9-lU-nja" firstAttribute="top" secondItem="t5o-9c-6fF" secondAttribute="bottom" id="2mR-KP-5w5"/>
+                    <constraint firstItem="Rk9-lU-nja" firstAttribute="top" secondItem="t5o-9c-6fF" secondAttribute="bottom" constant="5" id="2mR-KP-5w5"/>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="leading" secondItem="Rk9-lU-nja" secondAttribute="leading" id="2oM-Pv-5Tm"/>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="top" secondItem="y7e-KZ-LfL" secondAttribute="bottom" constant="15" id="3Yp-qF-oHi"/>
                     <constraint firstAttribute="trailing" secondItem="t5o-9c-6fF" secondAttribute="trailing" constant="20" id="6WZ-vC-mPm"/>
