@@ -64,10 +64,6 @@
 
 #pragma mark - Actions
 
-- (IBAction)openSnippetDirectoryAction:(id)sender {
-    [[NSWorkspace sharedWorkspace] openFile:[self pathForSnippetDirectory]];
-}
-
 - (IBAction)forkRemoteRepositoryAction:(id)sender {
     
     NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to fork %@?", self.remoteRepositoryTextfield.stringValue]
@@ -92,7 +88,7 @@
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     
-                    [self backupSnippets];
+                    [self backupUserSnippets];
                     
                     [weakSelf.gitDataStore removeAllCodeSnippets];
                     [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
@@ -116,11 +112,15 @@
     }];
 }
 
-- (IBAction)backupAction:(id)sender {
-    [self backupSnippets];
+- (IBAction)openUserSnippetsDirectoryAction:(id)sender {
+    [[NSWorkspace sharedWorkspace] openFile:[self pathForSnippetDirectory]];
 }
 
-- (void)backupSnippets {
+- (IBAction)backupUserSnippetsAction:(id)sender {
+    [self backupUserSnippets];
+}
+
+- (void)backupUserSnippets {
     NSError *error;
     if ([[NSFileManager defaultManager] createDirectoryAtPath:self.pathForBackupDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
         for (NSString *filename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.pathForSnippetDirectory error:&error]) {
