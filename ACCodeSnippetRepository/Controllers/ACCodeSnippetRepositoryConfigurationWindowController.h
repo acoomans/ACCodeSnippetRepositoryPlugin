@@ -15,14 +15,26 @@
 @end
 
 
-@interface ACCodeSnippetRepositoryConfigurationWindowController : NSWindowController <NSTextFieldDelegate>
+@interface ACCodeSnippetRepositoryConfigurationWindowController : NSWindowController <NSTextFieldDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, weak) id<ACCodeSnippetRepositoryConfigurationWindowControllerDelegate> delegate;
 
+@property (nonatomic, weak) IBOutlet NSTableView *remoteRepositoriesTableView;
+
+@property (nonatomic, weak) IBOutlet NSPanel *addRemoteRepositoryPanel;
 @property (nonatomic, weak) IBOutlet NSTextField *remoteRepositoryTextfield;
 @property (nonatomic, weak) IBOutlet NSButton *forkRemoteRepositoryButton;
 
+@property (nonatomic, weak) IBOutlet NSPanel *addingRemoteRepositoryPanel;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+
+
 - (IBAction)openSnippetDirectoryAction:(id)sender;
 - (IBAction)forkRemoteRepositoryAction:(id)sender;
+
+
+- (IBAction)addRemoteRepositoryAction:(id)sender;
+- (IBAction)cancelSheet:(id)sender;
+- (IBAction)deleteRemoteRepositoryAction:(id)sender;
 
 @end

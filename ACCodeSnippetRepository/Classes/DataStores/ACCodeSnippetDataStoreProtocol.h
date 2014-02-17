@@ -13,6 +13,8 @@
 
 - (NSOperationQueue*)mainQueue;
 
+- (NSString*)identifier;
+
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)updateCodeSnippets;

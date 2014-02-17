@@ -7,6 +7,7 @@
 //
 
 #import "ACCodeSnippetRepositoryConfigurationWindowController.h"
+#import "ACCodeSnippetDataStoreProtocol.h"
 #import "ACCodeSnippetGitDataStore.h"
 #import "IDECodeSnippetRepositorySwizzler.h"
 
@@ -17,10 +18,7 @@
 
 @implementation ACCodeSnippetRepositoryConfigurationWindowController
 
-#pragma mark - Initialization 
-
-// fork button -> fork + import all snippets + message "do you want to import all your current snippets in your git?"
-
+#pragma mark - Initialization
 
 
 - (id)initWithWindow:(NSWindow *)window {
@@ -33,18 +31,11 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    self.remoteRepositoryTextfield.stringValue = self.gitDataStore.remoteRepositoryURL.absoluteString?:@"";
 }
 
-- (ACCodeSnippetGitDataStore*)gitDataStore {
+- (NSArray*)dataStores {
     if ([self.delegate respondsToSelector:@selector(dataStoresForCodeSnippetConfigurationWindowController:)]) {
-        NSArray *dataStores = [self.delegate dataStoresForCodeSnippetConfigurationWindowController:self];
-        for (id dataStore in dataStores) {
-            if ([dataStore isKindOfClass:ACCodeSnippetGitDataStore.class]) {
-                return dataStore;
-            }
-            break;
-        }
+        return [self.delegate dataStoresForCodeSnippetConfigurationWindowController:self];
     }
     return nil;
 }
@@ -54,7 +45,7 @@
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField *textField = [notification object];
     
-    if (![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
+    if ([textField.stringValue length]) {
         self.forkRemoteRepositoryButton.enabled = YES;
     } else {
         self.forkRemoteRepositoryButton.enabled = NO;
@@ -69,37 +60,50 @@
 }
 
 - (IBAction)forkRemoteRepositoryAction:(id)sender {
-    NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to fork %@?", self.remoteRepositoryTextfield.stringValue]
-                                     defaultButton:@"Fork"
+    
+    [self.window endSheet:self.addRemoteRepositoryPanel];
+    
+    [self.window beginSheet:self.addingRemoteRepositoryPanel completionHandler:nil];
+    [self.progressIndicator startAnimation:self];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:self.remoteRepositoryTextfield.stringValue]];
+        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
+        [dataStore importCodeSnippets];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.remoteRepositoriesTableView reloadData];
+            [self.window endSheet:self.addingRemoteRepositoryPanel];
+            [self.progressIndicator stopAnimation:self];
+        });
+    });
+}
+
+- (IBAction)addRemoteRepositoryAction:(id)sender {
+    [self.window beginSheet:self.addRemoteRepositoryPanel completionHandler:nil];
+}
+
+- (IBAction)cancelSheet:(id)sender {
+    [self.window endSheet:self.addRemoteRepositoryPanel];
+}
+
+- (IBAction)deleteRemoteRepositoryAction:(id)sender {
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to remove %@?", self.remoteRepositoryTextfield.stringValue]
+                                     defaultButton:@"Remove"
                                    alternateButton:@"Cancel"
                                        otherButton:nil
-                         informativeTextWithFormat:@"This will remove all snippets from the current git repository and replace them with snippets from the new fork."];
+                         informativeTextWithFormat:@"This will remove all snippets from the current git repository."];
     
     __weak __block ACCodeSnippetRepositoryConfigurationWindowController *weakSelf = self;
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
-        switch (returnCode) {
-                
-            case NSModalResponseCancel: {
-                // nothing
-                break;
-            }
-                
-            case NSModalResponseOK: {
-                
-                [self backupSnippets];
-                
-                [weakSelf.gitDataStore removeAllCodeSnippets];
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:weakSelf.gitDataStore];
-                
-                ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:weakSelf.remoteRepositoryTextfield.stringValue]];
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
-                [dataStore importCodeSnippets];
-                
-                break;
-            }
-                
-            default:
-                break;
+        if (returnCode == NSModalResponseOK) {
+            [weakSelf backupSnippets];
+            
+            id<ACCodeSnippetDataStoreProtocol> dataStore = weakSelf.dataStores[weakSelf.remoteRepositoriesTableView.selectedRow];
+            [dataStore removeAllCodeSnippets];
+            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:dataStore];
+            [weakSelf.remoteRepositoriesTableView reloadData];
         }
     }];
 }
@@ -133,6 +137,17 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYMMdd-HHmm"];
     return [NSString pathWithComponents:@[self.pathForSnippetDirectory, [NSString stringWithFormat:@"backup-%@", [dateFormatter stringFromDate:currentDate]]]];
+}
+
+#pragma mark - NSTableViewDataSource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+    return [self.dataStores count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    id<ACCodeSnippetDataStoreProtocol> dataStore = self.dataStores[rowIndex];
+    return dataStore.identifier;
 }
 
 @end

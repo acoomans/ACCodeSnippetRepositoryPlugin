@@ -38,6 +38,10 @@
 
 #pragma mark - Properties
 
+- (NSString*)identifier {
+    return self.remoteRepositoryURL.absoluteString;
+}
+
 - (void)dataStoreWillAdd {
     if (![self.gitRepository localRepositoryExists]) {
         [self.gitRepository forkRemoteRepositoryWithURL:self.remoteRepositoryURL inDirectory:self.localRepositoryPath];

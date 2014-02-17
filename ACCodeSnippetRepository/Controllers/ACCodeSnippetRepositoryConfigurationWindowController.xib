@@ -6,7 +6,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ACCodeSnippetRepositoryConfigurationWindowController">
             <connections>
+                <outlet property="addRemoteRepositoryPanel" destination="1zp-aR-WQB" id="L1j-AL-sZf"/>
+                <outlet property="addingRemoteRepositoryPanel" destination="Lue-eQ-ZEf" id="GeE-jf-pQk"/>
                 <outlet property="forkRemoteRepositoryButton" destination="MAO-49-Lsk" id="B6e-e1-kqg"/>
+                <outlet property="progressIndicator" destination="kzp-P5-gUc" id="4y9-ZQ-6pw"/>
+                <outlet property="remoteRepositoriesTableView" destination="nMN-LR-l6E" id="0n7-N2-9uD"/>
                 <outlet property="remoteRepositoryTextfield" destination="u6C-cv-b5i" id="cpB-ZW-kvy"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
@@ -15,23 +19,192 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Xcode Snippet Git" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="596" y="535" width="527" height="217"/>
+            <rect key="contentRect" x="596" y="535" width="513" height="338"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="527" height="217"/>
+                <rect key="frame" x="0.0" y="0.0" width="513" height="338"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-iK-lwb">
+                        <rect key="frame" x="341" y="91" width="74" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="openSnippetDirectoryAction:" target="-2" id="Bfv-3e-qMs"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="66g-kz-3hH">
+                        <rect key="frame" x="18" y="100" width="89" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User snippets" id="L7P-88-bCV">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="58" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNu-rM-UlG">
+                        <rect key="frame" x="18" y="20" width="477" height="58"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Don't hesitate to contribute and submit your pull requests at https://github.com/acoomans/ACCodeSnippetRepositoryPlugin" allowsEditingTextAttributes="YES" id="41l-Xu-n1O">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Don't hesitate to contribute by submitting pull requests to
+https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Pe-4hD">
+                        <rect key="frame" x="413" y="91" width="86" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="backupAction:" target="-2" id="RAm-bR-xWC"/>
+                        </connections>
+                    </button>
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5o-9c-6fF">
+                        <rect key="frame" x="20" y="167" width="473" height="151"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <clipView key="contentView" id="0m3-UY-TPu">
+                            <rect key="frame" x="1" y="17" width="471" height="133"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="FlI-xA-lVL" id="nMN-LR-l6E">
+                                    <rect key="frame" x="0.0" y="0.0" width="471" height="133"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="468" minWidth="10" maxWidth="3.4028234663852886e+38" id="YXO-ZW-8zZ">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote repository">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Text" id="Q4K-yt-byv">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-2" id="TCE-YF-hlw"/>
+                                        <outlet property="delegate" destination="-2" id="g8I-hW-p72"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </clipView>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" priority="999" constant="252" id="CAm-5I-DfU"/>
+                        </constraints>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Bad-ks-O7f">
+                            <rect key="frame" x="1" y="2" width="0.0" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="NIo-OP-5k4">
+                            <rect key="frame" x="553" y="17" width="15" height="9"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <tableHeaderView key="headerView" id="FlI-xA-lVL">
+                            <rect key="frame" x="0.0" y="0.0" width="471" height="17"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </tableHeaderView>
+                    </scrollView>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Rk9-lU-nja">
+                        <rect key="frame" x="20" y="143" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="XLw-da-nS2"/>
+                            <constraint firstAttribute="height" constant="24" id="aQx-Yp-DxU"/>
+                        </constraints>
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="1tL-bv-EwV">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="addRemoteRepositoryAction:" target="-2" id="b8X-fb-dDH"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="SuS-hH-59H">
+                        <rect key="frame" x="44" y="143" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="EcM-HX-ufP"/>
+                            <constraint firstAttribute="width" constant="24" id="Lnh-AZ-6Vp"/>
+                        </constraints>
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="b46-Dh-M9Z">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="deleteRemoteRepositoryAction:" target="-2" id="zSp-lu-Mth"/>
+                        </connections>
+                    </button>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-KZ-LfL">
+                        <rect key="frame" x="20" y="130" width="473" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="t5o-9c-6fF" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="1r1-C1-BAk"/>
+                    <constraint firstItem="Rk9-lU-nja" firstAttribute="top" secondItem="t5o-9c-6fF" secondAttribute="bottom" id="2mR-KP-5w5"/>
+                    <constraint firstItem="t5o-9c-6fF" firstAttribute="leading" secondItem="Rk9-lU-nja" secondAttribute="leading" id="2oM-Pv-5Tm"/>
+                    <constraint firstItem="66g-kz-3hH" firstAttribute="top" secondItem="y7e-KZ-LfL" secondAttribute="bottom" constant="15" id="3Yp-qF-oHi"/>
+                    <constraint firstAttribute="trailing" secondItem="t5o-9c-6fF" secondAttribute="trailing" constant="20" id="6WZ-vC-mPm"/>
+                    <constraint firstAttribute="trailing" secondItem="wx0-Pe-4hD" secondAttribute="trailing" constant="20" id="8tN-FH-Bod"/>
+                    <constraint firstItem="y7e-KZ-LfL" firstAttribute="top" secondItem="Rk9-lU-nja" secondAttribute="bottom" constant="10" id="AOp-Br-JTt"/>
+                    <constraint firstAttribute="trailing" secondItem="zNu-rM-UlG" secondAttribute="trailing" constant="20" id="BS0-Tr-93K"/>
+                    <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="cgW-iK-lwb" secondAttribute="bottom" constant="20" id="OsZ-AM-oYS"/>
+                    <constraint firstItem="wx0-Pe-4hD" firstAttribute="leading" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="10" id="PHH-nN-IEN"/>
+                    <constraint firstItem="Rk9-lU-nja" firstAttribute="centerY" secondItem="SuS-hH-59H" secondAttribute="centerY" id="PSc-BJ-p4e"/>
+                    <constraint firstItem="66g-kz-3hH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="VtL-cX-twf"/>
+                    <constraint firstItem="wx0-Pe-4hD" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="bJ5-69-bgh"/>
+                    <constraint firstItem="t5o-9c-6fF" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="cAc-Lg-094"/>
+                    <constraint firstItem="66g-kz-3hH" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="j9G-qF-DtU"/>
+                    <constraint firstAttribute="trailing" secondItem="y7e-KZ-LfL" secondAttribute="trailing" constant="20" id="lsx-v1-dfQ"/>
+                    <constraint firstItem="SuS-hH-59H" firstAttribute="leading" secondItem="Rk9-lU-nja" secondAttribute="trailing" id="nES-TX-UdR"/>
+                    <constraint firstItem="y7e-KZ-LfL" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="qGj-UL-vgm"/>
+                    <constraint firstAttribute="bottom" secondItem="zNu-rM-UlG" secondAttribute="bottom" constant="20" id="qaE-Op-azO"/>
+                    <constraint firstAttribute="centerX" secondItem="y7e-KZ-LfL" secondAttribute="centerX" id="tAn-dt-f2Y"/>
+                    <constraint firstItem="zNu-rM-UlG" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="zqN-1M-lme"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="4"/>
+            </connections>
+        </window>
+        <window title="Add Remote Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="1zp-aR-WQB" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="167" y="107" width="369" height="120"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <view key="contentView" id="6wJ-xf-Qzr">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xhv-9D-MnH">
-                        <rect key="frame" x="18" y="180" width="123" height="17"/>
+                        <rect key="frame" x="18" y="83" width="185" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Remote Repository" id="D51-Tc-kHM">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Enter the repository address:" id="D51-Tc-kHM">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u6C-cv-b5i">
-                        <rect key="frame" x="159" y="177" width="282" height="22"/>
+                        <rect key="frame" x="20" y="51" width="329" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="kYX-Y7-Dc6"/>
@@ -45,37 +218,8 @@
                             <outlet property="delegate" destination="-2" id="jJX-zw-X1J"/>
                         </connections>
                     </textField>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-iK-lwb">
-                        <rect key="frame" x="153" y="129" width="74" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="openSnippetDirectoryAction:" target="-2" id="Bfv-3e-qMs"/>
-                        </connections>
-                    </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="66g-kz-3hH">
-                        <rect key="frame" x="18" y="138" width="89" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User snippets" id="L7P-88-bCV">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="58" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNu-rM-UlG">
-                        <rect key="frame" x="18" y="58" width="491" height="58"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Don't hesitate to contribute by submitting pull requests (https://github.com/acoomans/ACCodeSnippetRepositoryPlugin)" placeholderString="Don't hesitate to contribute and submit your pull requests at https://github.com/acoomans/ACCodeSnippetRepositoryPlugin" allowsEditingTextAttributes="YES" id="41l-Xu-n1O">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MAO-49-Lsk">
-                        <rect key="frame" x="445" y="169" width="68" height="32"/>
+                        <rect key="frame" x="287" y="13" width="68" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Fork" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YaN-FP-DjY">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -85,41 +229,63 @@
                             <action selector="forkRemoteRepositoryAction:" target="-2" id="GPN-Jb-Dn8"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Pe-4hD">
-                        <rect key="frame" x="225" y="129" width="86" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kZw-Im-8mG">
+                        <rect key="frame" x="207" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EgO-RR-A2V">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                         </buttonCell>
                         <connections>
-                            <action selector="backupAction:" target="-2" id="RAm-bR-xWC"/>
+                            <action selector="cancelSheet:" target="-2" id="gbV-UC-8M7"/>
                         </connections>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="MAO-49-Lsk" firstAttribute="baseline" secondItem="u6C-cv-b5i" secondAttribute="baseline" id="2Sm-9t-How"/>
-                    <constraint firstAttribute="trailing" secondItem="zNu-rM-UlG" secondAttribute="trailing" constant="20" id="BS0-Tr-93K"/>
-                    <constraint firstAttribute="trailing" secondItem="MAO-49-Lsk" secondAttribute="trailing" constant="20" id="DYY-yP-Vrp"/>
-                    <constraint firstItem="u6C-cv-b5i" firstAttribute="leading" secondItem="Xhv-9D-MnH" secondAttribute="trailing" constant="20" id="Dkb-oD-Rg6"/>
-                    <constraint firstItem="u6C-cv-b5i" firstAttribute="leading" secondItem="cgW-iK-lwb" secondAttribute="leading" id="F5x-LV-2re"/>
-                    <constraint firstItem="cgW-iK-lwb" firstAttribute="top" secondItem="u6C-cv-b5i" secondAttribute="bottom" constant="20" id="Mml-zG-1eD"/>
-                    <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="cgW-iK-lwb" secondAttribute="bottom" constant="20" id="OsZ-AM-oYS"/>
-                    <constraint firstItem="wx0-Pe-4hD" firstAttribute="leading" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="10" id="PHH-nN-IEN"/>
-                    <constraint firstItem="66g-kz-3hH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="VtL-cX-twf"/>
-                    <constraint firstItem="Xhv-9D-MnH" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="Xax-qQ-Ytk"/>
-                    <constraint firstItem="wx0-Pe-4hD" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="bJ5-69-bgh"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="20" id="bua-jC-NWh"/>
-                    <constraint firstItem="Xhv-9D-MnH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="f75-KL-cps"/>
-                    <constraint firstItem="66g-kz-3hH" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="j9G-qF-DtU"/>
-                    <constraint firstItem="u6C-cv-b5i" firstAttribute="baseline" secondItem="Xhv-9D-MnH" secondAttribute="baseline" constant="1" id="qBY-cC-0aw"/>
-                    <constraint firstItem="MAO-49-Lsk" firstAttribute="leading" secondItem="u6C-cv-b5i" secondAttribute="trailing" constant="10" id="scc-Zn-gq8"/>
-                    <constraint firstItem="zNu-rM-UlG" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="zqN-1M-lme"/>
+                    <constraint firstItem="MAO-49-Lsk" firstAttribute="centerY" secondItem="kZw-Im-8mG" secondAttribute="centerY" id="2fE-kT-Bnw"/>
+                    <constraint firstAttribute="trailing" secondItem="u6C-cv-b5i" secondAttribute="trailing" constant="20" id="ARW-fc-peo"/>
+                    <constraint firstItem="Xhv-9D-MnH" firstAttribute="leading" secondItem="6wJ-xf-Qzr" secondAttribute="leading" constant="20" id="Auk-K9-Bg4"/>
+                    <constraint firstItem="u6C-cv-b5i" firstAttribute="top" secondItem="Xhv-9D-MnH" secondAttribute="bottom" constant="10" id="Czb-ur-SUL"/>
+                    <constraint firstAttribute="bottom" secondItem="MAO-49-Lsk" secondAttribute="bottom" constant="20" id="LRV-dF-hMC"/>
+                    <constraint firstItem="MAO-49-Lsk" firstAttribute="leading" secondItem="kZw-Im-8mG" secondAttribute="trailing" constant="10" id="Nqk-v5-Are"/>
+                    <constraint firstItem="MAO-49-Lsk" firstAttribute="top" secondItem="u6C-cv-b5i" secondAttribute="bottom" constant="10" id="U1j-dx-37d"/>
+                    <constraint firstItem="u6C-cv-b5i" firstAttribute="leading" secondItem="6wJ-xf-Qzr" secondAttribute="leading" constant="20" id="h0q-F6-bNC"/>
+                    <constraint firstAttribute="trailing" secondItem="MAO-49-Lsk" secondAttribute="trailing" constant="20" id="jzZ-C7-uRP"/>
+                    <constraint firstItem="Xhv-9D-MnH" firstAttribute="top" secondItem="6wJ-xf-Qzr" secondAttribute="top" constant="20" id="p0l-f4-n1A"/>
                 </constraints>
             </view>
-            <connections>
-                <outlet property="delegate" destination="-2" id="4"/>
-            </connections>
+        </window>
+        <window title="Adding Remote Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Lue-eQ-ZEf" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="167" y="107" width="369" height="120"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <view key="contentView" id="keD-PD-BiU">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="kzp-P5-gUc">
+                        <rect key="frame" x="20" y="50" width="329" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="vQM-Aq-dcN"/>
+                        </constraints>
+                    </progressIndicator>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerX" secondItem="kzp-P5-gUc" secondAttribute="centerX" id="8Rz-0i-OPW"/>
+                    <constraint firstItem="kzp-P5-gUc" firstAttribute="leading" secondItem="keD-PD-BiU" secondAttribute="leading" constant="20" id="8gT-IK-sU4"/>
+                    <constraint firstAttribute="trailing" secondItem="kzp-P5-gUc" secondAttribute="trailing" constant="20" id="ruj-kP-UAL"/>
+                    <constraint firstAttribute="centerY" secondItem="kzp-P5-gUc" secondAttribute="centerY" id="wlw-5A-8dy"/>
+                </constraints>
+            </view>
         </window>
     </objects>
+    <resources>
+        <image name="NSAddTemplate" width="8" height="8"/>
+        <image name="NSRemoveTemplate" width="8" height="8"/>
+    </resources>
 </document>
