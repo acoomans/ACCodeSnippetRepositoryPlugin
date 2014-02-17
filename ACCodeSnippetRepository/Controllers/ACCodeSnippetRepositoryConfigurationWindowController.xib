@@ -19,14 +19,14 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Xcode Snippet Git" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="596" y="535" width="513" height="338"/>
+            <rect key="contentRect" x="596" y="535" width="513" height="434"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="513" height="338"/>
+                <rect key="frame" x="0.0" y="0.0" width="513" height="434"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-iK-lwb">
-                        <rect key="frame" x="341" y="91" width="74" height="32"/>
+                        <rect key="frame" x="341" y="126" width="74" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -37,7 +37,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="66g-kz-3hH">
-                        <rect key="frame" x="18" y="100" width="89" height="17"/>
+                        <rect key="frame" x="18" y="135" width="89" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User snippets" id="L7P-88-bCV">
                             <font key="font" metaFont="system"/>
@@ -57,25 +57,25 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Pe-4hD">
-                        <rect key="frame" x="413" y="91" width="86" height="32"/>
+                        <rect key="frame" x="413" y="126" width="86" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="backupAction:" target="-2" id="RAm-bR-xWC"/>
+                            <action selector="backupUserSnippetsAction:" target="-2" id="Y7p-cb-TK1"/>
                         </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5o-9c-6fF">
-                        <rect key="frame" x="20" y="167" width="473" height="151"/>
+                        <rect key="frame" x="20" y="202" width="473" height="212"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="0m3-UY-TPu">
-                            <rect key="frame" x="1" y="17" width="471" height="133"/>
+                            <rect key="frame" x="1" y="17" width="471" height="194"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="FlI-xA-lVL" id="nMN-LR-l6E">
-                                    <rect key="frame" x="0.0" y="0.0" width="471" height="133"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="471" height="194"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,7 +111,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="NIo-OP-5k4">
-                            <rect key="frame" x="553" y="17" width="15" height="9"/>
+                            <rect key="frame" x="457" y="17" width="15" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="FlI-xA-lVL">
@@ -120,7 +120,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </tableHeaderView>
                     </scrollView>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Rk9-lU-nja">
-                        <rect key="frame" x="20" y="143" width="24" height="24"/>
+                        <rect key="frame" x="20" y="178" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="XLw-da-nS2"/>
@@ -135,7 +135,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="SuS-hH-59H">
-                        <rect key="frame" x="44" y="143" width="24" height="24"/>
+                        <rect key="frame" x="44" y="178" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="EcM-HX-ufP"/>
@@ -150,7 +150,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="y7e-KZ-LfL">
-                        <rect key="frame" x="20" y="130" width="473" height="5"/>
+                        <rect key="frame" x="20" y="165" width="473" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -171,6 +171,37 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                             <action selector="openGithubAction:" target="-2" id="AEi-JT-uyv"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ptU-no-bP5">
+                        <rect key="frame" x="18" y="98" width="105" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="System snippets" id="qWQ-xB-vNk">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qt5-8v-Fqb">
+                        <rect key="frame" x="324" y="88" width="90" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ju6-bJ-J3m">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="removeSystemSnippets:" target="-2" id="Qsq-cI-n65"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="waD-aq-evJ">
+                        <rect key="frame" x="412" y="87" width="87" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QX4-tN-xR5">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="restoreSystemSnippets:" target="-2" id="gKq-Fw-jpA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="1r1-C1-BAk"/>
@@ -179,16 +210,22 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="top" secondItem="y7e-KZ-LfL" secondAttribute="bottom" constant="15" id="3Yp-qF-oHi"/>
                     <constraint firstAttribute="trailing" secondItem="t5o-9c-6fF" secondAttribute="trailing" constant="20" id="6WZ-vC-mPm"/>
                     <constraint firstAttribute="trailing" secondItem="wx0-Pe-4hD" secondAttribute="trailing" constant="20" id="8tN-FH-Bod"/>
+                    <constraint firstItem="ptU-no-bP5" firstAttribute="centerY" secondItem="qt5-8v-Fqb" secondAttribute="centerY" constant="-1" id="9YI-zI-YUb"/>
                     <constraint firstItem="y7e-KZ-LfL" firstAttribute="top" secondItem="Rk9-lU-nja" secondAttribute="bottom" constant="10" id="AOp-Br-JTt"/>
                     <constraint firstAttribute="trailing" secondItem="zNu-rM-UlG" secondAttribute="trailing" constant="20" id="BS0-Tr-93K"/>
+                    <constraint firstAttribute="trailing" secondItem="waD-aq-evJ" secondAttribute="trailing" constant="20" id="CTB-kD-3nB"/>
                     <constraint firstItem="oSA-py-KE0" firstAttribute="centerY" secondItem="zNu-rM-UlG" secondAttribute="centerY" constant="-4" id="DCK-xF-Tmj"/>
-                    <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="cgW-iK-lwb" secondAttribute="bottom" constant="20" id="OsZ-AM-oYS"/>
+                    <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="ptU-no-bP5" secondAttribute="bottom" constant="20" id="L0Q-Rr-ktY"/>
                     <constraint firstItem="wx0-Pe-4hD" firstAttribute="leading" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="10" id="PHH-nN-IEN"/>
                     <constraint firstItem="Rk9-lU-nja" firstAttribute="centerY" secondItem="SuS-hH-59H" secondAttribute="centerY" id="PSc-BJ-p4e"/>
+                    <constraint firstItem="ptU-no-bP5" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="RzR-ri-SiB"/>
                     <constraint firstItem="oSA-py-KE0" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="Tja-LG-ndg"/>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="VtL-cX-twf"/>
+                    <constraint firstItem="ptU-no-bP5" firstAttribute="top" secondItem="66g-kz-3hH" secondAttribute="bottom" constant="20" id="bGb-S7-BYa"/>
                     <constraint firstItem="wx0-Pe-4hD" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="bJ5-69-bgh"/>
                     <constraint firstItem="t5o-9c-6fF" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="cAc-Lg-094"/>
+                    <constraint firstItem="waD-aq-evJ" firstAttribute="centerY" secondItem="qt5-8v-Fqb" secondAttribute="centerY" constant="1" id="dBh-Qd-Bs9"/>
+                    <constraint firstItem="waD-aq-evJ" firstAttribute="leading" secondItem="qt5-8v-Fqb" secondAttribute="trailing" constant="10" id="ico-rf-ul4"/>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="j9G-qF-DtU"/>
                     <constraint firstAttribute="trailing" secondItem="y7e-KZ-LfL" secondAttribute="trailing" constant="20" id="lsx-v1-dfQ"/>
                     <constraint firstItem="SuS-hH-59H" firstAttribute="leading" secondItem="Rk9-lU-nja" secondAttribute="trailing" id="nES-TX-UdR"/>

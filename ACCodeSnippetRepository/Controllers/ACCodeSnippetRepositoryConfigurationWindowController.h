@@ -28,14 +28,4 @@
 @property (nonatomic, weak) IBOutlet NSPanel *addingRemoteRepositoryPanel;
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
 
-
-- (IBAction)openSnippetDirectoryAction:(id)sender;
-- (IBAction)forkRemoteRepositoryAction:(id)sender;
-
-- (IBAction)addRemoteRepositoryAction:(id)sender;
-- (IBAction)cancelSheet:(id)sender;
-- (IBAction)deleteRemoteRepositoryAction:(id)sender;
-
-- (IBAction)openGithubAction:(id)sender;
-
 @end
