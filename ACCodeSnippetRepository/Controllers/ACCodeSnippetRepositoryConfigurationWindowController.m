@@ -117,6 +117,7 @@
 }
 
 - (IBAction)backupUserSnippetsAction:(id)sender {
+    NSLog(@"backupUserSnippetsAction");
     [self backupUserSnippets];
 }
 
@@ -132,6 +133,61 @@
         }
     }
 }
+
+
+- (IBAction)removeSystemSnippets:(id)sender {
+    NSError *error;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.systemSnippetsBackupPath isDirectory:nil] ||
+        [[NSFileManager defaultManager] moveItemAtPath:self.systemSnippetsPath
+                                                toPath:self.systemSnippetsBackupPath
+                                                 error:&error]
+        ) {
+        
+        // we need an empty file or Xcode will complain and crash at startup
+        [[NSFileManager defaultManager] createFileAtPath:self.systemSnippetsPath
+                                                contents:nil
+                                              attributes:0];
+        
+        [[NSAlert alertWithMessageText:@"Restart Xcode for changes to take effect."
+                         defaultButton:@"OK"
+                       alternateButton:nil
+                           otherButton:nil
+             informativeTextWithFormat:@""] beginSheetModalForWindow:self.window completionHandler:nil];
+    } else {
+        [[NSAlert alertWithError:error] beginSheetModalForWindow:self.window completionHandler:nil];
+    }
+}
+
+- (IBAction)restoreSystemSnippets:(id)sender {
+    NSError *error;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.systemSnippetsBackupPath isDirectory:nil]) {
+        [[NSFileManager defaultManager] removeItemAtPath:self.systemSnippetsPath error:&error];
+        
+        if ([[NSFileManager defaultManager] copyItemAtPath:self.systemSnippetsBackupPath
+                                                    toPath:self.systemSnippetsPath
+                                                     error:&error]) {
+            [[NSAlert alertWithMessageText:@"Restart Xcode for changes to take effect."
+                             defaultButton:@"OK"
+                           alternateButton:nil
+                               otherButton:nil
+                 informativeTextWithFormat:@""] beginSheetModalForWindow:self.window completionHandler:nil];
+        } else {
+            [[NSAlert alertWithError:error] beginSheetModalForWindow:self.window completionHandler:nil];
+        }
+    }
+}
+
+
+- (NSString*)systemSnippetsPath {
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.dt.IDE.IDECodeSnippetLibrary"];
+    return [bundle pathForResource:@"SystemCodeSnippets" ofType:@"codesnippets"];
+}
+
+- (NSString*)systemSnippetsBackupPath {
+    return [self.systemSnippetsPath stringByAppendingPathExtension:@"backup"];
+}
+
 
 - (IBAction)openGithubAction:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/acoomans/ACCodeSnippetRepositoryPlugin"]];
