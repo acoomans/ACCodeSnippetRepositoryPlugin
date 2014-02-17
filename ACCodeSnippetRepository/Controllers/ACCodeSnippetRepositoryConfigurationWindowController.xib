@@ -26,14 +26,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-iK-lwb">
-                        <rect key="frame" x="341" y="126" width="74" height="32"/>
+                        <rect key="frame" x="282" y="126" width="86" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
+                        <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="openSnippetDirectoryAction:" target="-2" id="Bfv-3e-qMs"/>
+                            <action selector="backupUserSnippetsAction:" target="-2" id="a2b-UQ-QKS"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="66g-kz-3hH">
@@ -57,14 +57,14 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Pe-4hD">
-                        <rect key="frame" x="413" y="126" width="86" height="32"/>
+                        <rect key="frame" x="366" y="126" width="133" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
+                        <buttonCell key="cell" type="push" title="Show in Finder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="backupUserSnippetsAction:" target="-2" id="Y7p-cb-TK1"/>
+                            <action selector="openSnippetDirectoryAction:" target="-2" id="zBd-Ta-hQ2"/>
                         </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5o-9c-6fF">
