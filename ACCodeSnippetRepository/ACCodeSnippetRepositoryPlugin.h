@@ -11,4 +11,6 @@
 
 @interface ACCodeSnippetRepositoryPlugin : NSObject <NSWindowDelegate, ACCodeSnippetRepositoryConfigurationWindowControllerDelegate>
 
+@property (nonatomic, strong) NSTimer *updatesTimer;
+
 @end

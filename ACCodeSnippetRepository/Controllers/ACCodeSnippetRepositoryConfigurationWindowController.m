@@ -12,6 +12,9 @@
 #import "ACCodeSnippetGitDataStore.h"
 
 
+NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepositoryUpdateRegularlyKey";
+
+
 @interface ACCodeSnippetRepositoryConfigurationWindowController ()
 @property (nonatomic, strong) NSURL *snippetRemoteRepositoryURL;
 @end
@@ -32,6 +35,8 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     self.remoteRepositoryTextfield.stringValue = self.gitDataStore.remoteRepositoryURL.absoluteString?:@"";
+    
+    self.updateRegularlyCheckbox.state = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCodeSnippetRepositoryUpdateRegularlyKey] integerValue];
 }
 
 - (ACCodeSnippetGitDataStore*)gitDataStore {
@@ -59,8 +64,12 @@
     }
 }
 
-
 #pragma mark - Actions
+
+- (IBAction)updateCheckboxAction:(NSButton*)button {
+    [[NSUserDefaults standardUserDefaults] setObject:@(button.state) forKey:ACCodeSnippetRepositoryUpdateRegularlyKey];
+}
+
 
 - (IBAction)forkRemoteRepositoryAction:(id)sender {
     

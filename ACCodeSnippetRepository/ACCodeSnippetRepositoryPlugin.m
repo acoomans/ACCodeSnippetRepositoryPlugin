@@ -49,6 +49,15 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         [codeSnippetRepository addDataStore:gitDataStore];
         [codeSnippetRepository addObserver:self forKeyPath:@"dataStores" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
         
+        // timer for updates
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+                                                forKeyPath:ACCodeSnippetRepositoryUpdateRegularlyKey
+                                                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                                                   context:NULL];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:ACCodeSnippetRepositoryUpdateRegularlyKey] integerValue]) {
+            [self startTimer];
+        }
+        
         // Create menu items, initialize UI, etc.
         NSMenu *pluginMenu = [self pluginMenu];
         pluginMenu.autoenablesItems = NO;
@@ -118,11 +127,6 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     if (notification.object == self.configurationWindowController.window) {
         self.configurationWindowController = nil;
     }
-    
-    /*
-    if (notification.object == self.logWindowController.window) {
-        self.logWindowController = nil;
-    }*/
 }
 
 #pragma mark - NSKeyValueObserving
@@ -151,6 +155,16 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         for (id dataStore in change[NSKeyValueChangeNewKey]) {
             [dataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
         }
+        
+    } else if ([keyPath isEqualToString:ACCodeSnippetRepositoryUpdateRegularlyKey]) {
+        if (
+            ([[[NSUserDefaults standardUserDefaults] objectForKey:ACCodeSnippetRepositoryUpdateRegularlyKey] integerValue] == NSOnState) &&
+            ![self.updatesTimer isValid]
+            ) {
+            [self startTimer];
+        } else {
+            [self stopTimer];
+        }
     }
 }
 
@@ -158,6 +172,26 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 
 - (NSArray*)dataStoresForCodeSnippetConfigurationWindowController:(ACCodeSnippetRepositoryConfigurationWindowController*)configurationWindowController {
     return [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores];
+}
+
+#pragma mark - timer
+
+- (void)startTimer {
+    [self.updatesTimer invalidate];
+    self.updatesTimer = [NSTimer scheduledTimerWithTimeInterval:60*10
+                                                         target:self
+                                                       selector:@selector(updateTimerTicked:)
+                                                       userInfo:nil
+                                                        repeats:YES];
+}
+
+- (void)stopTimer {
+    [self.updatesTimer invalidate];
+    self.updatesTimer = nil;
+}
+
+- (void)updateTimerTicked:(NSTimer*)timer {
+    [self updateAction:self];
 }
 
 @end

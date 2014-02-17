@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+extern NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey;
+
+
 @class ACCodeSnippetRepositoryConfigurationWindowController;
 
 @protocol ACCodeSnippetRepositoryConfigurationWindowControllerDelegate <NSObject>
@@ -24,5 +28,7 @@
 
 @property (nonatomic, weak) IBOutlet NSPanel *forkingRemoteRepositoryPanel;
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+
+@property (nonatomic, weak) IBOutlet NSButton *updateRegularlyCheckbox;
 
 @end
