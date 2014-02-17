@@ -61,7 +61,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
-            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippet repositories" action:@selector(configureAction:) keyEquivalent:@""];
+            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippets repository" action:@selector(configureAction:) keyEquivalent:@""];
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
