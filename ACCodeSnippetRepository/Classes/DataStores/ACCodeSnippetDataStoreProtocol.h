@@ -13,7 +13,7 @@
 
 - (NSOperationQueue*)mainQueue;
 
-- (NSString*)identifier;
+@property (nonatomic, copy) NSURL *remoteRepositoryURL;
 
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet;

@@ -63,20 +63,35 @@
     
     [self.window endSheet:self.addRemoteRepositoryPanel];
     
-    [self.window beginSheet:self.addingRemoteRepositoryPanel completionHandler:nil];
-    [self.progressIndicator startAnimation:self];
+    NSURL *remoteRepositoryURL = [NSURL URLWithString:self.remoteRepositoryTextfield.stringValue];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:self.remoteRepositoryTextfield.stringValue]];
-        [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
-        [dataStore importCodeSnippets];
+    BOOL isPresent = NO;
+    for (id<ACCodeSnippetDataStoreProtocol>dataStore in self.dataStores) {
+        if ([dataStore.remoteRepositoryURL isEqualTo:remoteRepositoryURL]) {
+            isPresent = YES;
+            break;
+        }
+    }
+    
+    if (!isPresent) {
+        [self.window beginSheet:self.addingRemoteRepositoryPanel completionHandler:nil];
+        [self.progressIndicator startAnimation:self];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.remoteRepositoriesTableView reloadData];
-            [self.window endSheet:self.addingRemoteRepositoryPanel];
-            [self.progressIndicator stopAnimation:self];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:remoteRepositoryURL];
+            [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
+            [dataStore importCodeSnippets];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.remoteRepositoriesTableView reloadData];
+                [self.window endSheet:self.addingRemoteRepositoryPanel];
+                [self.progressIndicator stopAnimation:self];
+            });
         });
-    });
+    } else {
+        [[NSAlert alertWithError:[NSError errorWithDomain:@"Repository already exists" code:-1 userInfo:nil]] beginSheetModalForWindow:self.window completionHandler:nil];
+    }
+    
 }
 
 - (IBAction)addRemoteRepositoryAction:(id)sender {
@@ -147,7 +162,7 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
     id<ACCodeSnippetDataStoreProtocol> dataStore = self.dataStores[rowIndex];
-    return dataStore.identifier;
+    return dataStore.remoteRepositoryURL;
 }
 
 @end
