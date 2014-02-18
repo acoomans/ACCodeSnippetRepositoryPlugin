@@ -13,6 +13,9 @@
 		5105B22818AC59520066728E /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 5105B22618AC59520066728E /* NSTask+Extras.m */; };
 		5132BF3618AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */; };
 		5133D0D018AC5CF900998BE2 /* ACGitRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */; };
+		5153BAA918B3406D00C1E75B /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */; };
+		5153BAAA18B3406D00C1E75B /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */; };
+		5153BAAC18B3410C00C1E75B /* NSDictionary+MergeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAAB18B3410C00C1E75B /* NSDictionary+MergeTests.m */; };
 		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
 		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
 		515CE9DA18B1DCAA000962EA /* GitHub-Mark-120px-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */; };
@@ -54,6 +57,9 @@
 		5105B22618AC59520066728E /* NSTask+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Extras.m"; sourceTree = "<group>"; };
 		5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetGitDataStoreTests.m; sourceTree = "<group>"; };
 		5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGitRepositoryTests.m; sourceTree = "<group>"; };
+		5153BAA718B3406D00C1E75B /* NSDictionary+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Merge.h"; sourceTree = "<group>"; };
+		5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Merge.m"; sourceTree = "<group>"; };
+		5153BAAB18B3410C00C1E75B /* NSDictionary+MergeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MergeTests.m"; sourceTree = "<group>"; };
 		5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACCodeSnippetRepository Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5154068418AC4B500065CA33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACCodeSnippetRepository Tests-Info.plist"; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 				517FD2D018AC4C89003E1813 /* ACCodeSnippetSerializationTests.m */,
 				5133D0CF18AC5CF900998BE2 /* ACGitRepositoryTests.m */,
 				5132BF3518AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m */,
+				5153BAAB18B3410C00C1E75B /* NSDictionary+MergeTests.m */,
 				5154068718AC4B500065CA33 /* Supporting Files */,
 			);
 			path = "ACCodeSnippetRepository Tests";
@@ -285,6 +292,8 @@
 				51D2D55318AC58FD00493579 /* NSString+Path.m */,
 				5105B22518AC59520066728E /* NSTask+Extras.h */,
 				5105B22618AC59520066728E /* NSTask+Extras.m */,
+				5153BAA718B3406D00C1E75B /* NSDictionary+Merge.h */,
+				5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -388,11 +397,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				51010E0318AC5CB1000AA1F1 /* ACGitRepository.m in Sources */,
+				5153BAAC18B3410C00C1E75B /* NSDictionary+MergeTests.m in Sources */,
 				517DF2A718AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
 				517FD2D118AC4C89003E1813 /* ACCodeSnippetSerializationTests.m in Sources */,
 				517E12C118AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */,
 				517FD2CF18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
 				5105B22818AC59520066728E /* NSTask+Extras.m in Sources */,
+				5153BAAA18B3406D00C1E75B /* NSDictionary+Merge.m in Sources */,
 				51D2D55518AC590000493579 /* NSString+Path.m in Sources */,
 				517DF2A918AC4BF1008980B3 /* Swizzler.m in Sources */,
 				5132BF3618AD5EE500C0DE83 /* ACCodeSnippetGitDataStoreTests.m in Sources */,
@@ -409,6 +420,7 @@
 				517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */,
 				5162AC2A18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m in Sources */,
 				517E12C018AC5F8A0072B743 /* ACCodeSnippetGitDataStore.m in Sources */,
+				5153BAA918B3406D00C1E75B /* NSDictionary+Merge.m in Sources */,
 				517DF2A818AC4BF1008980B3 /* Swizzler.m in Sources */,
 				517FD2CE18AC4C70003E1813 /* ACCodeSnippetSerialization.m in Sources */,
 				5105B22718AC59520066728E /* NSTask+Extras.m in Sources */,
