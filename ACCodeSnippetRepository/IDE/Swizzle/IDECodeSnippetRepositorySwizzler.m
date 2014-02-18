@@ -15,8 +15,11 @@ static char const * const kIDECodeSnippetRepositorySwizzledDataStores = "kIDECod
 @implementation IDECodeSnippetRepositorySwizzler
 
 + (void)load {
-    [[NSBundle bundleWithIdentifier:@"com.apple.dt.IDE.IDECodeSnippetLibrary"] load];
-    [self swizzleWithClass:NSClassFromString(@"IDECodeSnippetRepository")];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSBundle bundleWithIdentifier:@"com.apple.dt.IDE.IDECodeSnippetLibrary"] load];
+        [self swizzleWithClass:NSClassFromString(@"IDECodeSnippetRepository")];
+    });
 }
 
 #pragma mark - overrides
