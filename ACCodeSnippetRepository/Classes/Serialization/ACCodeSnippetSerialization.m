@@ -50,9 +50,7 @@ NSString * const ACCodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.Ob
         [string appendFormat:@"// %@: %@\n", key, value];
     }
     
-    [string appendString:@"\n"];
     [string appendString:(contents?:@"")];
-    [string appendString:@"\n"];
     
     return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
@@ -123,7 +121,7 @@ NSString * const ACCodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.Ob
             }
             
         } else {
-            contents = [[contents stringByAppendingString:line] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            contents = [contents stringByAppendingFormat:@"%@\n", line]; //stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         }
         
         i++;

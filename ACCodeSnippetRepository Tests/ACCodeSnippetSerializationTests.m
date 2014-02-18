@@ -19,7 +19,7 @@
     NSDictionary *dict = @{
                            ACCodeSnippetTitleKey: @"title",
                            ACCodeSnippetSummaryKey: @"summary",
-                           ACCodeSnippetContentsKey: @"content",
+                           ACCodeSnippetContentsKey: @"line1\nline2\nline3",
                            @"WhateverKey": @"WhateverValue",
                            @"Array": @[@"one", @"two"],
                            };
@@ -33,7 +33,7 @@
     
     STAssertTrue([string rangeOfString:@"title"].location != NSNotFound, nil);
     STAssertTrue([string rangeOfString:@"summary"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"content"].location != NSNotFound, nil);
+    STAssertTrue([string rangeOfString:@"line1\nline2\nline3"].location != NSNotFound, nil);
     STAssertTrue([string rangeOfString:@"WhateverKey"].location != NSNotFound, nil);
     STAssertTrue([string rangeOfString:@"WhateverValue"].location != NSNotFound, nil);
     
@@ -42,7 +42,7 @@
 }
 
 - (void)testDeserialize {
-    NSString *string = @"// title\n// summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\ncontents\n";
+    NSString *string = @"// title\n// summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\nline1\nline2\nline3\n";
     
     NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:[string dataUsingEncoding:NSUTF8StringEncoding]
                                                                 options:0
@@ -52,7 +52,7 @@
     
     STAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"], nil);
     STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
-    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"contents"], nil);
+    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"], nil);
     STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
     
     NSArray *a = @[@"one", @"two"];
@@ -60,7 +60,7 @@
 }
 
 - (void)testDeserialize2 {
-    NSString *string = @"// Title: title\n// Summary: summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\ncontents\n";
+    NSString *string = @"// Title: title\n// Summary: summary\n//\n// WhateverKey: WhateverValue\n// Array: [one,two]\nline1\nline2\nline3\n";
     
     NSDictionary *dict = [ACCodeSnippetSerialization dictionaryWithData:[string dataUsingEncoding:NSUTF8StringEncoding]
                                                                 options:0
@@ -70,7 +70,7 @@
     
     STAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"], nil);
     STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
-    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"contents"], nil);
+    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"], nil);
     STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
     
     NSArray *a = @[@"one", @"two"];
@@ -82,7 +82,9 @@
     NSDictionary *dict1 = @{
                            ACCodeSnippetTitleKey: @"title",
                            ACCodeSnippetSummaryKey: @"summary",
-                           ACCodeSnippetContentsKey: @"content",
+                           ACCodeSnippetContentsKey: @"line1\nline2\nline3\n",
+                           ACCodeSnippetLanguageKey: ACCodeSnippetLanguageObjectiveC,
+                           ACCodeSnippetUserSnippetKey: @"1",
                            @"WhateverKey": @"WhateverValue",
                            @"Array": @[@"one", @"two"],
                            };
