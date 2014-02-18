@@ -34,21 +34,22 @@ static char const * const kIDECodeSnippetRepositorySwizzledDataStores = "kIDECod
 - (void)override_saveUserCodeSnippetToDisk:(id)arg1 { // saveUserCodeSnippetToDisk: instead of addCodeSnippet: so to catch edits as well
     NSLog(@"ACCodeSnippetRepositoryPlugin -- saveUserCodeSnippetToDisk: %@", arg1);
     
+    [self override_saveUserCodeSnippetToDisk:arg1];
+    
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [self dataStores]) {
         [dataStore addCodeSnippet:(IDECodeSnippet*)arg1];
     }
-    
-    [self override_saveUserCodeSnippetToDisk:arg1];
 }
 
 - (void)override_removeCodeSnippet:(id)arg1 {
     NSLog(@"ACCodeSnippetRepositoryPlugin -- removeCodeSnippet: %@", arg1);
     
+    [self override_removeCodeSnippet:arg1];
+    
+    
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [self dataStores]) {
         [dataStore removeCodeSnippet:(IDECodeSnippet*)arg1];
     }
-    
-    [self override_removeCodeSnippet:arg1];
 }
 
 

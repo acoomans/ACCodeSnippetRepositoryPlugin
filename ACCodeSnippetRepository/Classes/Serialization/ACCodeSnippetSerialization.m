@@ -63,10 +63,7 @@ NSString * const ACCodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.Ob
     
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    NSMutableDictionary *dict = [@{
-                                   ACCodeSnippetUserSnippetKey: @(YES),
-                                   ACCodeSnippetLanguageKey: ACCodeSnippetLanguageObjectiveC,
-                                   } mutableCopy];
+    NSMutableDictionary *dict = [@{} mutableCopy];
 
     __block BOOL isParsingHeader = YES;
     __block NSString *contents = @"";

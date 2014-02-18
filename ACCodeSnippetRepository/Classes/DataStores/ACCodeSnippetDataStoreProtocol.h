@@ -15,10 +15,12 @@
 
 - (void)addCodeSnippet:(IDECodeSnippet*)snippet;
 - (void)removeCodeSnippet:(IDECodeSnippet*)snippet;
-- (void)updateCodeSnippets;
 
+- (void)syncCodeSnippets;
+
+- (void)importAllCodeSnippets;
 - (void)removeAllCodeSnippets;
-- (void)importCodeSnippets;
+
 
 @optional
 - (void)dataStoreWillAdd;

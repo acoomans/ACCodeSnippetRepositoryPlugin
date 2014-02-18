@@ -21,7 +21,7 @@
     ACGitRepository *gitRepository = [[ACGitRepository alloc] init];
     ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] initWithGitRepository:gitRepository];
     
-    [gitDataStore updateCodeSnippets];
+    [gitDataStore syncCodeSnippets];
     
 }
 

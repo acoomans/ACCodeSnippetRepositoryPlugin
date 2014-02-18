@@ -152,14 +152,14 @@ NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
     
     NSString *output;
     NSTask *task = [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
-                                                 arguments:@[@"pull", @"-s", @"recursive", @"-X", @"ours", @"--no-commit"]
+                                                 arguments:@[@"pull", @"-s", @"recursive", @"-X", @"theirs", @"--no-commit"]
                                     inCurrentDirectoryPath:self.localRepositoryPath
                                     standardOutputAndError:&output];
     self.taskLog = [self.taskLog stringByAppendingString:output];
     
     if (task.terminationStatus != 0) {
         [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
-                                      arguments:@[@"pull", @"-s", @"ours", @"--no-commit"]
+                                      arguments:@[@"pull", @"-s", @"theirs", @"--no-commit"]
                          inCurrentDirectoryPath:self.localRepositoryPath
                          standardOutputAndError:&output];
         self.taskLog = [self.taskLog stringByAppendingString:output];

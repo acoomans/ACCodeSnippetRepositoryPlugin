@@ -113,7 +113,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 
 - (void)updateSnippets {
     for (id<ACCodeSnippetDataStoreProtocol> dataStore in [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] dataStores]) {
-        [dataStore updateCodeSnippets];
+        [dataStore syncCodeSnippets];
     }
 }
 

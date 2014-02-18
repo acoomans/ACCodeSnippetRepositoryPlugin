@@ -83,8 +83,6 @@
                            ACCodeSnippetTitleKey: @"title",
                            ACCodeSnippetSummaryKey: @"summary",
                            ACCodeSnippetContentsKey: @"line1\nline2\nline3\n",
-                           ACCodeSnippetLanguageKey: ACCodeSnippetLanguageObjectiveC,
-                           ACCodeSnippetUserSnippetKey: @"1",
                            @"WhateverKey": @"WhateverValue",
                            @"Array": @[@"one", @"two"],
                            };

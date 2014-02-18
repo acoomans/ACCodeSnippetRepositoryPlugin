@@ -97,15 +97,18 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     
+                    NSLog(@"----- backup");
                     [self backupUserSnippets];
                     
+                    NSLog(@"----- remove");
                     [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:dataStore];
                     [dataStore removeAllCodeSnippets];
                     [dataStore.gitRepository removeLocalRepository];
-                    
+
+                    NSLog(@"----- add");
                     ACCodeSnippetGitDataStore *dataStore = [[ACCodeSnippetGitDataStore alloc] initWithRemoteRepositoryURL:[NSURL URLWithString:weakSelf.remoteRepositoryTextfield.stringValue]];
                     [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addDataStore:dataStore];
-                    [dataStore importCodeSnippets];
+                    [dataStore importAllCodeSnippets];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.window endSheet:self.forkingRemoteRepositoryPanel];
