@@ -94,6 +94,7 @@
 		518E69AC18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetRepositoryPlugin.h; sourceTree = "<group>"; };
 		518E69AD18AC4A8900C57456 /* ACCodeSnippetRepositoryPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetRepositoryPlugin.m; sourceTree = "<group>"; };
 		518E69AF18AC4A8900C57456 /* ACCodeSnippetRepository-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository-Prefix.pch"; sourceTree = "<group>"; };
+		519AC2B318B4257600F3B4EA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		51D2D55218AC58FD00493579 /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
 		51D2D55318AC58FD00493579 /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +235,7 @@
 		518E699618AC4A8900C57456 = {
 			isa = PBXGroup;
 			children = (
+				519AC2B318B4257600F3B4EA /* README.md */,
 				518E69A618AC4A8900C57456 /* ACCodeSnippetRepository */,
 				5154068618AC4B500065CA33 /* ACCodeSnippetRepository Tests */,
 				518E69A118AC4A8900C57456 /* Frameworks */,
