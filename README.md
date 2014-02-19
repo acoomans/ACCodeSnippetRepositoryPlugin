@@ -8,6 +8,8 @@ The snippets are synchronized as human-readable text (and not an obscure _.codes
 
 If you want to know more about snippets in Xcode, I recommend eading [Xcode Snippets on NSHipster](http://nshipster.com/xcode-snippets/).
 
+Want to try the plugin with an existing public repository? Try [acoomans](https://github.com/acoomans/xcode-snippets) or [mattt](https://github.com/mattt/Xcode-Snippets.git)'s snippets.
+
 
 ## Install
 
