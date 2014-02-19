@@ -30,7 +30,7 @@ Existing snippets in Xcode are *NOT* exported to the repository.
 
 Also, you can remove the system snippets if you don't use them.
 
-In case of any problem, you can go to the user snippets folder (see below, _Bugs and limitations_) and backup your user snippets. Note that user snippets are automatically backed up before any fork.
+In case of any problem (see below, _Bugs and limitations_), you can go to the user snippets folder and backup your user snippets. Note that user snippets are automatically backed up before any fork.
 
 
 ## Usage
@@ -61,9 +61,9 @@ If your snippet does not contain any header, the header will be added, committed
 
 Every change in a snippet is commited and pushed independently.
 
-Synchronizing (pulling) with the remote repository is done every 10 minutes (if the option is enabled) or when the `Update snippets` item was chosen in the menu.
+Snippets are synchronized (pulled) with the remote repository is done every 10 minutes (if the option is enabled) or when the `Update snippets` item was chosen in the menu.
 
-In case of conflict, the remote repository is always right (or should be).
+In case of conflict during the merge, the remote repository has priority.
 
 
 ## Bugs and limitations
