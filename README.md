@@ -24,7 +24,7 @@ First configure the plugin by forking a remote repository:
 
 ![screenshots](Screenshots/screenshot02.png)
 
-When you fork, all snippets from the repository (in text format and with a _.m_ file extension) will be imported in Xcode.
+When you fork, all snippets from the repository (with the right format, see below _Format_) will be imported in Xcode.
 Existing snippets in Xcode are *NOT* exported to the repository.
 
 
@@ -41,13 +41,15 @@ Use snippets like you always do in Xcode. Snippets are automatically added/edite
 
 ### Format 
 
-The snippets are saved in the following format:
+The snippets are text files with a _.m_ file extension, in the following format:
 
 * a header, containing:
 	* the title
 	* description
 	* various Xcode-related information
 * the code
+
+If your snippet does not contain any header, the header will be added, committed and pushed when imported.
 
 **Note**: do not remove the Xcode-related information as they are needed for synchronization.
 
