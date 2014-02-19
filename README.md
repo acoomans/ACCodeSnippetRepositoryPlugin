@@ -6,6 +6,8 @@ The snippets are synchronized as human-readable text (and not an obscure _.codes
 
 [![Build Status](https://api.travis-ci.org/acoomans/ACCodeSnippetRepositoryPlugin.png)](https://api.travis-ci.org/acoomans/ACCodeSnippetRepositoryPlugin.png)
 
+If you want to know more about snippets in Xcode, I recommend eading [Xcode Snippets on NSHipster](http://nshipster.com/xcode-snippets/).
+
 
 ## Install
 
