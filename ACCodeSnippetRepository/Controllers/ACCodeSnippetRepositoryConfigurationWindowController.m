@@ -85,8 +85,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                                        otherButton:nil
                          informativeTextWithFormat:@"This will remove all snippets from the current git repository and replace them with snippets from the new fork."];
     
-    //TODO clean weakSelf
-    __weak __block ACCodeSnippetRepositoryConfigurationWindowController *weakSelf = self;
+    __weak typeof(self)weakSelf = self;
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
         switch (returnCode) {
                 
@@ -97,16 +96,16 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
             case NSModalResponseOK: {
                 
-                __block ACCodeSnippetGitDataStore *dataStore = self.gitDataStore;
+                __block ACCodeSnippetGitDataStore *dataStore = weakSelf.gitDataStore;
                 
                 //TODO rename forkingRemoteRepositoryPanel to activityPanel
-                [self.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
-                [self.progressIndicator startAnimation:self];
+                [weakSelf.window beginSheet:weakSelf.forkingRemoteRepositoryPanel completionHandler:nil];
+                [weakSelf.progressIndicator startAnimation:weakSelf];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     
                     NSLog(@"----- backup");
-                    [self backupUserSnippets];
+                    [weakSelf backupUserSnippets];
                     
                     NSLog(@"----- remove");
                     [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] removeDataStore:dataStore];
@@ -119,11 +118,11 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                     [dataStore importAllCodeSnippets];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.window endSheet:self.forkingRemoteRepositoryPanel];
-                        [self.progressIndicator stopAnimation:self];
+                        [weakSelf.window endSheet:weakSelf.forkingRemoteRepositoryPanel];
+                        [weakSelf.progressIndicator stopAnimation:weakSelf];
                     });
                     
-                    [weakSelf importUserSnippetsAction:self];
+                    [weakSelf importUserSnippetsAction:weakSelf];
                 });
 
                 break;
@@ -176,10 +175,10 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
             case NSModalResponseOK: {
                 
-                __block ACCodeSnippetGitDataStore *dataStore = self.gitDataStore;
+                __block ACCodeSnippetGitDataStore *dataStore = weakSelf.gitDataStore;
                 
-                [weakSelf.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
-                [weakSelf.progressIndicator startAnimation:self];
+                [weakSelf.window beginSheet:weakSelf.forkingRemoteRepositoryPanel completionHandler:nil];
+                [weakSelf.progressIndicator startAnimation:weakSelf];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     

@@ -80,7 +80,7 @@
     if (!self.gitRepository) return;
     
     __block IDECodeSnippet *blockSnippet = snippet;
-    __weak ACCodeSnippetGitDataStore *weakSelf = self;
+    __weak typeof(self)weakSelf = self;
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
         
@@ -101,7 +101,7 @@
     if (!self.gitRepository) return;
     
     __block IDECodeSnippet *blockSnippet = snippet;
-    __weak ACCodeSnippetGitDataStore *weakSelf = self;
+    __weak typeof(self)weakSelf = self;
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
         
@@ -117,7 +117,7 @@
 - (void)syncCodeSnippets {
     if (!self.gitRepository) return;
     
-    __weak ACCodeSnippetGitDataStore *weakSelf = self;
+    __weak typeof(self)weakSelf = self;
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
         
