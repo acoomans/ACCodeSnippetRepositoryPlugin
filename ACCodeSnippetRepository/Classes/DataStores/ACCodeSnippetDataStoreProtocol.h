@@ -19,6 +19,7 @@
 - (void)syncCodeSnippets;
 
 - (void)importAllCodeSnippets;
+- (void)exportAllCodeSnippets;
 - (void)removeAllCodeSnippets;
 
 

@@ -120,6 +120,10 @@ NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
 }
 
 - (void)commit {
+    [self commitWithMessage:@""];
+}
+
+- (void)commitWithMessage:(NSString*)message {
     if (![self localRepositoryExists]) return;
     
     NSString *output;
@@ -130,7 +134,7 @@ NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
     self.taskLog = [self.taskLog stringByAppendingString:output];
     
     [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
-                                  arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
+                                  arguments:@[@"commit", @"--allow-empty-message", @"-m", message]
                      inCurrentDirectoryPath:self.localRepositoryPath
                      standardOutputAndError:&output];
     self.taskLog = [self.taskLog stringByAppendingString:output];

@@ -62,6 +62,12 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
     } else {
         self.forkRemoteRepositoryButton.enabled = NO;
     }
+    
+    if ([textField.stringValue length]) {
+        self.importButton.enabled = YES;
+    } else {
+        self.importButton.enabled = NO;
+    }
 }
 
 #pragma mark - Actions
@@ -79,6 +85,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                                        otherButton:nil
                          informativeTextWithFormat:@"This will remove all snippets from the current git repository and replace them with snippets from the new fork."];
     
+    //TODO clean weakSelf
     __weak __block ACCodeSnippetRepositoryConfigurationWindowController *weakSelf = self;
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
         switch (returnCode) {
@@ -92,6 +99,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
                 __block ACCodeSnippetGitDataStore *dataStore = self.gitDataStore;
                 
+                //TODO rename forkingRemoteRepositoryPanel to activityPanel
                 [self.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
                 [self.progressIndicator startAnimation:self];
                 
@@ -114,6 +122,8 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                         [self.window endSheet:self.forkingRemoteRepositoryPanel];
                         [self.progressIndicator stopAnimation:self];
                     });
+                    
+                    [weakSelf importUserSnippetsAction:self];
                 });
 
                 break;
@@ -147,6 +157,48 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
     }
 }
 
+- (IBAction)importUserSnippetsAction:(id)sender {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Do you want to import your existing user code snippets in the repository?"
+                                     defaultButton:@"Import"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"This will import all your user code snippets in the current git repository. System code snippets will not be imported."];
+    
+    __weak typeof(self)weakSelf = self;
+
+    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+        switch (returnCode) {
+                
+            case NSModalResponseCancel: {
+                // nothing
+                break;
+            }
+                
+            case NSModalResponseOK: {
+                
+                __block ACCodeSnippetGitDataStore *dataStore = self.gitDataStore;
+                
+                [weakSelf.window beginSheet:self.forkingRemoteRepositoryPanel completionHandler:nil];
+                [weakSelf.progressIndicator startAnimation:self];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    
+                    [dataStore exportAllCodeSnippets];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.window endSheet:weakSelf.forkingRemoteRepositoryPanel];
+                        [weakSelf.progressIndicator stopAnimation:weakSelf];
+                    });
+                });
+                
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }];
+}
 
 - (IBAction)removeSystemSnippets:(id)sender {
     NSError *error;

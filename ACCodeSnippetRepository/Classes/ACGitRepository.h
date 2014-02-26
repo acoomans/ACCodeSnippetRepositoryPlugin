@@ -34,6 +34,7 @@ extern NSString * const ACGitRepositoryFileChangeUnmergedKey;
 - (NSString*)identifierForCurrentCommit;
 
 - (void)commit;
+- (void)commitWithMessage:(NSString*)message;
 - (void)fetch;
 - (void)pull;
 - (void)push;

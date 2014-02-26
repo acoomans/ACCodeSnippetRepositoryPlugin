@@ -88,7 +88,7 @@
         
         if (![blockSnippet.title isEqualToString:@"My Code Snippet"]) {
             //[weakSelf removeAllFilesInLocalRepositoryForSnippet:blockSnippet];
-            [weakSelf addFileInLocalRepositoryForSnippet:blockSnippet];
+            [weakSelf addFileInLocalRepositoryForSnippet:blockSnippet overwrite:YES];
             [weakSelf.gitRepository commit];
             [weakSelf.gitRepository push];
         }
@@ -151,6 +151,17 @@
     [self updateSnippetsForFilesInLocalRepository:filenames];
 }
 
+- (void)exportAllCodeSnippets {
+    NSLog(@"%@ exportAllCodeSnippets", self);
+    
+    IDECodeSnippetRepository *codeSnippetRepository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
+    for (IDECodeSnippet *snippet in codeSnippetRepository.codeSnippets) {
+        [self addFileInLocalRepositoryForSnippet:snippet overwrite:NO];
+    }
+    [self.gitRepository commitWithMessage:@"Imported user code snippets"];
+    [self.gitRepository push];
+}
+
 - (void)removeAllCodeSnippets {
     
     NSLog(@"%@ removeAllCodeSnippets", self);
@@ -165,7 +176,7 @@
 
 #pragma mark - File operations
 
-- (void)addFileInLocalRepositoryForSnippet:(IDECodeSnippet*)snippet {
+- (BOOL)addFileInLocalRepositoryForSnippet:(IDECodeSnippet*)snippet overwrite:(BOOL)overwrite {
     
     NSLog(@"%@ addFileInLocalRepositoryForSnippet: %@", self, snippet);
     
@@ -178,10 +189,14 @@
     if (!filename) {
         filename = [[[[snippet.title lowercaseString] stringByAppendingString:@".m"] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringBySanitizingFilename];
     }
-
+    
     NSString *path = [NSString pathWithComponents:@[self.localRepositoryPath, filename]];
     
-    [data writeToFile:path atomically:YES];
+    if (overwrite || ![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [data writeToFile:path atomically:YES];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)removeAllFilesInLocalRepositoryForSnippet:(IDECodeSnippet*)snippet {

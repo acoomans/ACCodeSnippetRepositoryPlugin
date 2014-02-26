@@ -25,6 +25,7 @@ extern NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey;
 
 @property (nonatomic, weak) IBOutlet NSTextField *remoteRepositoryTextfield;
 @property (nonatomic, weak) IBOutlet NSButton *forkRemoteRepositoryButton;
+@property (nonatomic, weak) IBOutlet NSButton *importButton;
 
 @property (nonatomic, weak) IBOutlet NSPanel *forkingRemoteRepositoryPanel;
 @property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;

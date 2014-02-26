@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="forkRemoteRepositoryButton" destination="MAO-49-Lsk" id="B6e-e1-kqg"/>
                 <outlet property="forkingRemoteRepositoryPanel" destination="bV9-kY-3j8" id="RKe-hD-gah"/>
+                <outlet property="importButton" destination="6Bh-Gm-vKD" id="fvr-Mx-ltk"/>
                 <outlet property="progressIndicator" destination="3Ki-Ll-OPB" id="Aj0-Qw-9fE"/>
                 <outlet property="remoteRepositoryTextfield" destination="u6C-cv-b5i" id="cpB-ZW-kvy"/>
                 <outlet property="updateRegularlyCheckbox" destination="D9y-cW-3fD" id="WNN-wQ-DCS"/>
@@ -167,6 +168,17 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                             <action selector="updateCheckboxAction:" target="-2" id="piK-yC-RKH"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bh-Gm-vKD">
+                        <rect key="frame" x="368" y="147" width="83" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lAc-mu-nJS">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="importUserSnippetsAction:" target="-2" id="9Z6-94-W4X"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cgW-iK-lwb" firstAttribute="leading" secondItem="wXC-64-Yw2" secondAttribute="leading" id="0Mt-ae-BS2"/>
@@ -174,6 +186,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     <constraint firstItem="Meg-Ff-fcZ" firstAttribute="top" secondItem="z6Y-Ny-Wx0" secondAttribute="bottom" constant="20" id="3JT-yA-ded"/>
                     <constraint firstItem="zNu-rM-UlG" firstAttribute="leading" secondItem="vnv-22-gD2" secondAttribute="trailing" constant="10" id="3ty-zA-5px"/>
                     <constraint firstItem="zNu-rM-UlG" firstAttribute="top" secondItem="Meg-Ff-fcZ" secondAttribute="bottom" constant="20" id="7vv-0Q-llw"/>
+                    <constraint firstItem="6Bh-Gm-vKD" firstAttribute="leading" secondItem="wx0-Pe-4hD" secondAttribute="trailing" constant="10" id="9b5-Py-Ek1"/>
                     <constraint firstAttribute="trailing" secondItem="zNu-rM-UlG" secondAttribute="trailing" constant="20" id="BS0-Tr-93K"/>
                     <constraint firstAttribute="trailing" secondItem="MAO-49-Lsk" secondAttribute="trailing" constant="20" id="DYY-yP-Vrp"/>
                     <constraint firstItem="u6C-cv-b5i" firstAttribute="leading" secondItem="Xhv-9D-MnH" secondAttribute="trailing" constant="20" id="Dkb-oD-Rg6"/>
@@ -186,6 +199,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     <constraint firstItem="ELh-Xa-1vT" firstAttribute="centerY" secondItem="wXC-64-Yw2" secondAttribute="centerY" id="U1Q-wI-dgd"/>
                     <constraint firstItem="66g-kz-3hH" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="VtL-cX-twf"/>
                     <constraint firstItem="Xhv-9D-MnH" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" id="Xax-qQ-Ytk"/>
+                    <constraint firstItem="6Bh-Gm-vKD" firstAttribute="centerY" secondItem="wx0-Pe-4hD" secondAttribute="centerY" id="ZB9-g0-Z4b"/>
                     <constraint firstItem="wx0-Pe-4hD" firstAttribute="centerY" secondItem="cgW-iK-lwb" secondAttribute="centerY" id="bJ5-69-bgh"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cgW-iK-lwb" secondAttribute="trailing" constant="20" id="bua-jC-NWh"/>
                     <constraint firstItem="vnv-22-gD2" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="30" id="c55-Sl-lns"/>
