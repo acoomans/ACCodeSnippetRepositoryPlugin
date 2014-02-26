@@ -7,9 +7,9 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ACCodeSnippetRepositoryConfigurationWindowController">
             <connections>
                 <outlet property="forkRemoteRepositoryButton" destination="MAO-49-Lsk" id="B6e-e1-kqg"/>
-                <outlet property="forkingRemoteRepositoryPanel" destination="bV9-kY-3j8" id="RKe-hD-gah"/>
                 <outlet property="importButton" destination="6Bh-Gm-vKD" id="fvr-Mx-ltk"/>
                 <outlet property="progressIndicator" destination="3Ki-Ll-OPB" id="Aj0-Qw-9fE"/>
+                <outlet property="progressPanel" destination="bV9-kY-3j8" id="RLo-li-wdn"/>
                 <outlet property="remoteRepositoryTextfield" destination="u6C-cv-b5i" id="cpB-ZW-kvy"/>
                 <outlet property="updateRegularlyCheckbox" destination="D9y-cW-3fD" id="WNN-wQ-DCS"/>
                 <outlet property="window" destination="1" id="3"/>

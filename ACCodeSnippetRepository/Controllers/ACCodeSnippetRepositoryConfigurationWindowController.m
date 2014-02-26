@@ -98,8 +98,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
                 __block ACCodeSnippetGitDataStore *dataStore = weakSelf.gitDataStore;
                 
-                //TODO rename forkingRemoteRepositoryPanel to activityPanel
-                [weakSelf.window beginSheet:weakSelf.forkingRemoteRepositoryPanel completionHandler:nil];
+                [weakSelf.window beginSheet:weakSelf.progressPanel completionHandler:nil];
                 [weakSelf.progressIndicator startAnimation:weakSelf];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -118,7 +117,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                     [dataStore importAllCodeSnippets];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf.window endSheet:weakSelf.forkingRemoteRepositoryPanel];
+                        [weakSelf.window endSheet:weakSelf.progressPanel];
                         [weakSelf.progressIndicator stopAnimation:weakSelf];
                     });
                     
@@ -177,7 +176,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                 
                 __block ACCodeSnippetGitDataStore *dataStore = weakSelf.gitDataStore;
                 
-                [weakSelf.window beginSheet:weakSelf.forkingRemoteRepositoryPanel completionHandler:nil];
+                [weakSelf.window beginSheet:weakSelf.progressPanel completionHandler:nil];
                 [weakSelf.progressIndicator startAnimation:weakSelf];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -185,7 +184,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                     [dataStore exportAllCodeSnippets];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf.window endSheet:weakSelf.forkingRemoteRepositoryPanel];
+                        [weakSelf.window endSheet:weakSelf.progressPanel];
                         [weakSelf.progressIndicator stopAnimation:weakSelf];
                     });
                 });
