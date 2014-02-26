@@ -40,7 +40,7 @@ NSString * const ACCodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.Ob
     [string appendFormat:@"// %@\n", (summary?:@"")];
     [string appendString:@"//\n"];
     
-    for (NSString *key in dict.keyEnumerator) {
+    for (NSString *key in [[dict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
         
         id value = dict[key];
         
