@@ -266,8 +266,13 @@
             __block IDECodeSnippet *snippet = [[NSClassFromString(@"IDECodeSnippet") alloc] initWithDictionaryRepresentation:dict];
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] override_saveUserCodeSnippetToDisk:snippet];
-                [[NSClassFromString(@"IDECodeSnippetRepository") sharedRepository] addCodeSnippet:snippet];
+                
+                IDECodeSnippetRepository *repository = [NSClassFromString(@"IDECodeSnippetRepository") sharedRepository];
+                [repository override_saveUserCodeSnippetToDisk:snippet];
+                
+                if (![repository codeSnippetForIdentifier:snippet.identifier]) {
+                    [repository addCodeSnippet:snippet];
+                }
                 
                 NSData *data = [ACCodeSnippetSerialization dataWithDictionary:dict
                                                                        format:0
