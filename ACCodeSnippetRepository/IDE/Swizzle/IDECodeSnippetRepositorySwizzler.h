@@ -17,7 +17,6 @@
 - (void)removeDataStore:(id<ACCodeSnippetDataStoreProtocol>)dataStore;
 
 - (void)addCodeSnippet:(id)arg1;
-- (void)override_addCodeSnippet:(id)arg1;
 - (void)removeCodeSnippet:(id)arg1;
 
 - (IDECodeSnippet*)codeSnippetForIdentifier:(NSString*)identifier;
