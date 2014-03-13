@@ -243,7 +243,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 
 
 - (NSString*)systemSnippetsPath {
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.dt.IDE.IDECodeSnippetLibrary"];
+    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"IDECodeSnippetRepository")];
     return [bundle pathForResource:@"SystemCodeSnippets" ofType:@"codesnippets"];
 }
 
