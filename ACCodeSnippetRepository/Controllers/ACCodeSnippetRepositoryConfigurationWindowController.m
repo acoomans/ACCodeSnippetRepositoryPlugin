@@ -241,6 +241,9 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
     }
 }
 
+- (IBAction)openSystemSnippetsDirectoryAction:(id)sender {
+    [[NSWorkspace sharedWorkspace] selectFile:[self systemSnippetsPath] inFileViewerRootedAtPath:nil];
+}
 
 - (NSString*)systemSnippetsPath {
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"IDECodeSnippetRepository")];
