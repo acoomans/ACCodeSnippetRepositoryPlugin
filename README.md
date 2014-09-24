@@ -17,6 +17,8 @@ Want to try the plugin with an existing public repository? Try [acoomans](https:
 
 2. Restart Xcode for the plugin to be activated.
 
+Alternatively, install through [Alcatraz](https://github.com/supermarin/Alcatraz) plugin manager.
+
 
 ## Configuration
 
