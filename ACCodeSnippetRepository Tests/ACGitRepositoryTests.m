@@ -23,7 +23,7 @@
     
     ACGitRepository *git = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:gitPath];
     
-    //[git forkRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
+    //[git cloneRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
     //[git removeLocalRepository];
     //NSLog(@"%@", [git identifierForCurrentCommit]);
     //NSLog(@"%@", [git changedFilesSinceCommitWithIdentifier:@"HEAD~6"]);

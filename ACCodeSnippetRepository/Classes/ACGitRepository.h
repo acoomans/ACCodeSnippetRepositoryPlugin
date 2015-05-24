@@ -29,7 +29,7 @@ extern NSString * const ACGitRepositoryFileChangeUnmergedKey;
 - (void)initializeLocalRepository;
 - (void)initializeLocalRepositoryInDirectory:(NSString*)localRepositoryPath;
 
-- (void)forkRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath;
+- (void)cloneRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath;
 
 - (NSString*)identifierForCurrentCommit;
 

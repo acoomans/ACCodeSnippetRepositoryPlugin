@@ -21,7 +21,7 @@
 - (id)initWithRemoteRepositoryURL:(NSURL*)remoteRepositoryURL {
     ACGitRepository *gitRepository = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:self.localRepositoryPath];
     if (remoteRepositoryURL && !gitRepository.localRepositoryExists) {
-        [gitRepository forkRemoteRepositoryWithURL:remoteRepositoryURL inDirectory:self.localRepositoryPath];
+        [gitRepository cloneRemoteRepositoryWithURL:remoteRepositoryURL inDirectory:self.localRepositoryPath];
     }
     return [self initWithGitRepository:gitRepository];
 }
@@ -58,7 +58,7 @@
 - (void)dataStoreWillAdd {
     NSLog(@"%@ dataStoreWillAdd", self);
     if (![self.gitRepository localRepositoryExists]) {
-        [self.gitRepository forkRemoteRepositoryWithURL:self.remoteRepositoryURL inDirectory:self.localRepositoryPath];
+        [self.gitRepository cloneRemoteRepositoryWithURL:self.remoteRepositoryURL inDirectory:self.localRepositoryPath];
     }
 }
 
@@ -158,7 +158,7 @@
     for (IDECodeSnippet *snippet in codeSnippetRepository.codeSnippets) {
         [self addFileInLocalRepositoryForSnippet:snippet overwrite:NO];
     }
-    [self.gitRepository commitWithMessage:@"Imported user code snippets"];
+    [self.gitRepository commitWithMessage:@"Pushed user code snippets"];
     [self.gitRepository push];
 }
 

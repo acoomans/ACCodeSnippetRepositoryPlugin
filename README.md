@@ -26,17 +26,17 @@ There should be a `Plug-ins` item in the xcode menu:
 
 ![screenshots](Screenshots/screenshot01.png)
 
-First configure the plugin by forking a remote repository:
+First configure the plugin by cloning a remote repository:
 
 ![screenshots](Screenshots/screenshot02.png)
 
-When you fork, all snippets from the repository (with the right format, see below _Format_) will be imported in Xcode. Your existing snippets, that do not belong to any repository yet, will not be affected.
+When you clone, all snippets from the repository (with the right format, see below _Format_) will be imported in Xcode. Your existing snippets, that do not belong to any repository yet, will not be affected.
 
-After forking, you will given the choice to import (user) snippets from Xcode to the repository.
+After cloning, you will given the choice to import (user) snippets from Xcode to the repository.
 
 Also, you can remove the system snippets if you don't use them.
 
-In case of any problem (see below, _Bugs and limitations_), you can go to the user snippets folder and backup your user snippets. Note that user snippets are automatically backed up before any fork.
+In case of any problem (see below, _Bugs and limitations_), you can go to the user snippets folder and backup your user snippets. Note that user snippets are automatically backed up before any clone.
 
 
 ## Usage
