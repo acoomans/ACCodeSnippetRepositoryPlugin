@@ -129,7 +129,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                             <constraint firstAttribute="width" constant="32" id="BhJ-tv-NyN"/>
                             <constraint firstAttribute="height" constant="32" id="GYx-uL-RWW"/>
                         </constraints>
-                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="GitHub-Mark-64px" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ot1-5p-hiQ">
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="GitHubImage" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ot1-5p-hiQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -257,6 +257,6 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
         </window>
     </objects>
     <resources>
-        <image name="GitHub-Mark-64px" width="64" height="64"/>
+        <image name="GitHubImage" width="32" height="32"/>
     </resources>
 </document>
