@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ACCodeSnippetRepositoryConfigurationWindowController">
             <connections>
-                <outlet property="forkRemoteRepositoryButton" destination="MAO-49-Lsk" id="B6e-e1-kqg"/>
+                <outlet property="cloneRemoteRepositoryButton" destination="MAO-49-Lsk" id="8bj-Kz-uWx"/>
                 <outlet property="importButton" destination="6Bh-Gm-vKD" id="fvr-Mx-ltk"/>
                 <outlet property="progressIndicator" destination="3Ki-Ll-OPB" id="Aj0-Qw-9fE"/>
                 <outlet property="progressPanel" destination="bV9-kY-3j8" id="RLo-li-wdn"/>
@@ -16,18 +17,17 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Snippets Repository Configuration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="596" y="535" width="527" height="235"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="contentRect" x="596" y="535" width="533" height="235"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1417"/>
             <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="527" height="235"/>
+                <rect key="frame" x="0.0" y="0.0" width="533" height="235"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xhv-9D-MnH">
                         <rect key="frame" x="18" y="198" width="123" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Remote Repository" id="D51-Tc-kHM">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -35,8 +35,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u6C-cv-b5i">
-                        <rect key="frame" x="159" y="195" width="282" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="159" y="195" width="280" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="kYX-Y7-Dc6"/>
                         </constraints>
@@ -51,7 +50,6 @@
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-iK-lwb">
                         <rect key="frame" x="153" y="147" width="133" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Show in Finder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dc4-kA-v6f">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -61,8 +59,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="66g-kz-3hH">
-                        <rect key="frame" x="18" y="156" width="89" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="18" y="156" width="90" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User snippets" id="L7P-88-bCV">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -70,8 +67,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="42" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNu-rM-UlG">
-                        <rect key="frame" x="70" y="20" width="439" height="42"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="70" y="20" width="445" height="42"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Don't hesitate to contribute and submit your pull requests at https://github.com/acoomans/ACCodeSnippetRepositoryPlugin" allowsEditingTextAttributes="YES" id="41l-Xu-n1O">
                             <font key="font" metaFont="system"/>
                             <string key="title">Don't hesitate to contribute by submitting pull requests at
@@ -81,8 +77,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z6Y-Ny-Wx0">
-                        <rect key="frame" x="18" y="119" width="105" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="18" y="119" width="107" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="System snippets" id="PRh-PY-DhO">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -90,8 +85,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wXC-64-Yw2">
-                        <rect key="frame" x="153" y="110" width="90" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="153" y="110" width="91" height="32"/>
                         <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oi-sP-Fgn">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -101,8 +95,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ELh-Xa-1vT">
-                        <rect key="frame" x="241" y="110" width="87" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="242" y="110" width="88" height="32"/>
                         <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DRi-gI-0ml">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -113,7 +106,6 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ywk-cq-vim">
                         <rect key="frame" x="328" y="110" width="133" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Show in Finder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gMX-IB-WsW">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -124,7 +116,6 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="vnv-22-gD2">
                         <rect key="frame" x="30" y="25" width="32" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="BhJ-tv-NyN"/>
                             <constraint firstAttribute="height" constant="32" id="GYx-uL-RWW"/>
@@ -138,19 +129,17 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MAO-49-Lsk">
-                        <rect key="frame" x="445" y="187" width="68" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Fork" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YaN-FP-DjY">
+                        <rect key="frame" x="443" y="187" width="76" height="32"/>
+                        <buttonCell key="cell" type="push" title="Clone" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YaN-FP-DjY">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="forkRemoteRepositoryAction:" target="-2" id="GPN-Jb-Dn8"/>
+                            <action selector="cloneRemoteRepositoryAction:" target="-2" id="Mt4-sk-SRC"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Pe-4hD">
-                        <rect key="frame" x="284" y="147" width="86" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="284" y="147" width="87" height="32"/>
                         <buttonCell key="cell" type="push" title="Backup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pqa-Y5-WGQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -161,7 +150,6 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Meg-Ff-fcZ">
                         <rect key="frame" x="18" y="82" width="106" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Update snippets" id="Z3q-dw-yFT">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -169,8 +157,7 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="D9y-cW-3fD">
-                        <rect key="frame" x="157" y="80" width="130" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="157" y="80" width="127" height="18"/>
                         <buttonCell key="cell" type="check" title="every 10 minutes" bezelStyle="regularSquare" imagePosition="left" inset="2" id="kqA-jc-PrO">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -180,14 +167,13 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bh-Gm-vKD">
-                        <rect key="frame" x="368" y="147" width="83" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lAc-mu-nJS">
+                        <rect key="frame" x="369" y="147" width="122" height="32"/>
+                        <buttonCell key="cell" type="push" title="Export (push)" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lAc-mu-nJS">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="importUserSnippetsAction:" target="-2" id="9Z6-94-W4X"/>
+                            <action selector="exportUserSnippetsAction:" target="-2" id="wVV-dz-Xzq"/>
                         </connections>
                     </button>
                 </subviews>
@@ -229,19 +215,19 @@ https://github.com/acoomans/ACCodeSnippetRepositoryPlugin</string>
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
+            <point key="canvasLocation" x="402.5" y="357.5"/>
         </window>
         <window title="Adding Remote Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="bV9-kY-3j8" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="167" y="107" width="369" height="57"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1417"/>
             <view key="contentView" id="5cI-54-i0V">
                 <rect key="frame" x="0.0" y="0.0" width="369" height="57"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="3Ki-Ll-OPB">
                         <rect key="frame" x="20" y="19" width="329" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="rtZ-NG-E3U"/>
                         </constraints>

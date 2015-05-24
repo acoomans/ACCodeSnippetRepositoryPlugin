@@ -86,7 +86,7 @@ NSString * const ACGitRepositoryFileChangeUnmergedKey = @"U";
     }
 }
 
-- (void)forkRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath {
+- (void)cloneRemoteRepositoryWithURL:(NSURL*)remoteRepositoryURL inDirectory:(NSString*)localRepositoryPath {
     if (
         ![[NSFileManager defaultManager] fileExistsAtPath:localRepositoryPath] &&
         remoteRepositoryURL) {
