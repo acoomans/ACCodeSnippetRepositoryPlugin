@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ACCodeSnippetGitDataStore.h"
 
 
-@interface ACCodeSnippetGitDataStoreTests : SenTestCase
+@interface ACCodeSnippetGitDataStoreTests : XCTestCase
 @end
 
 @implementation ACCodeSnippetGitDataStoreTests
