@@ -242,7 +242,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 }
 
 - (IBAction)openSystemSnippetsDirectoryAction:(id)sender {
-    [[NSWorkspace sharedWorkspace] selectFile:[self systemSnippetsPath] inFileViewerRootedAtPath:nil];
+    [[NSWorkspace sharedWorkspace] selectFile:[self systemSnippetsPath] inFileViewerRootedAtPath: @""];
 }
 
 - (NSString*)systemSnippetsPath {
