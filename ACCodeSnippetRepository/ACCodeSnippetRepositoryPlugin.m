@@ -97,7 +97,7 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     if (!pluginMenu) {
         pluginMenu = [[NSMenu alloc] initWithTitle:pluginMenuTitle];
         
-        NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginMenuTitle action:nil keyEquivalent:@""];
+        NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginMenuTitle action: NULL keyEquivalent:@""];
         pluginMenuItem.submenu = pluginMenu;
         
         [[NSApp mainMenu] addItem:pluginMenuItem];
