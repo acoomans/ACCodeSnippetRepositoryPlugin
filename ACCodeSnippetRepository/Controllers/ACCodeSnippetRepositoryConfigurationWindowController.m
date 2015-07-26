@@ -120,8 +120,10 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                         [weakSelf.window endSheet:weakSelf.progressPanel];
                         [weakSelf.progressIndicator stopAnimation:weakSelf];
                     });
-                    
-                    [weakSelf importUserSnippetsAction:weakSelf];
+				 
+				 dispatch_async(dispatch_get_main_queue(), ^{
+					[weakSelf importUserSnippetsAction:weakSelf];
+				 });
                 });
 
                 break;
