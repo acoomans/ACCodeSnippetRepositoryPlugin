@@ -58,9 +58,9 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
     NSTextField *textField = [notification object];
     
     if (![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
-        self.forkRemoteRepositoryButton.enabled = YES;
+        self.cloneRemoteRepositoryButton.enabled = YES;
     } else {
-        self.forkRemoteRepositoryButton.enabled = NO;
+        self.cloneRemoteRepositoryButton.enabled = NO;
     }
     
     if ([textField.stringValue length]) {
@@ -77,13 +77,13 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 }
 
 
-- (IBAction)forkRemoteRepositoryAction:(id)sender {
-    
-    NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to fork %@?", self.remoteRepositoryTextfield.stringValue]
-                                     defaultButton:@"Fork"
+- (IBAction)cloneRemoteRepositoryAction:(id)sender {
+   
+    NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Do you want to clone %@?", self.remoteRepositoryTextfield.stringValue]
+                                     defaultButton:@"Clone"
                                    alternateButton:@"Cancel"
                                        otherButton:nil
-                         informativeTextWithFormat:@"This will remove all snippets from the current git repository and replace them with snippets from the new fork."];
+                         informativeTextWithFormat:@"All snippets from the current git repository will be removed from Xcode and replaced with snippets from the new cloned repository."];
     
     __weak typeof(self)weakSelf = self;
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
@@ -122,7 +122,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                     });
 				 
 				 dispatch_async(dispatch_get_main_queue(), ^{
-					[weakSelf importUserSnippetsAction:weakSelf];
+                    [weakSelf exportUserSnippetsAction:weakSelf];
 				 });
                 });
 
@@ -157,12 +157,12 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
     }
 }
 
-- (IBAction)importUserSnippetsAction:(id)sender {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Do you want to import your existing user code snippets in the repository?"
-                                     defaultButton:@"Import"
+- (IBAction)exportUserSnippetsAction:(id)sender {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Do you want to export (push) your existing user code snippets to the repository?"
+                                     defaultButton:@"Export"
                                    alternateButton:@"Cancel"
                                        otherButton:nil
-                         informativeTextWithFormat:@"This will import all your user code snippets in the current git repository. System code snippets will not be imported."];
+                         informativeTextWithFormat:@"This will export all your user code snippets to the current git repository."];
     
     __weak typeof(self)weakSelf = self;
 
@@ -272,7 +272,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 - (NSString*)pathForBackupDirectory {
     NSDate *currentDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYMMdd-HHmm"];
+    [dateFormatter setDateFormat:@"yyMMdd-HHmm"];
     return [NSString pathWithComponents:@[self.pathForSnippetDirectory, [NSString stringWithFormat:@"backup-%@", [dateFormatter stringFromDate:currentDate]]]];
 }
 
