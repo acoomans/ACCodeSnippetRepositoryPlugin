@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ACCodeSnippetSerialization.h"
 
-@interface ACCodeSnippetSerializationTests : SenTestCase
+@interface ACCodeSnippetSerializationTests : XCTestCase
 @end
 
 @implementation ACCodeSnippetSerializationTests
@@ -31,14 +31,14 @@
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"\n%@", string);
     
-    STAssertTrue([string rangeOfString:@"title"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"summary"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"line1\nline2\nline3"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"WhateverKey"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"WhateverValue"].location != NSNotFound, nil);
+    XCTAssertTrue([string rangeOfString:@"title"].location != NSNotFound);
+    XCTAssertTrue([string rangeOfString:@"summary"].location != NSNotFound);
+    XCTAssertTrue([string rangeOfString:@"line1\nline2\nline3"].location != NSNotFound);
+    XCTAssertTrue([string rangeOfString:@"WhateverKey"].location != NSNotFound);
+    XCTAssertTrue([string rangeOfString:@"WhateverValue"].location != NSNotFound);
     
-    STAssertTrue([string rangeOfString:@"one"].location != NSNotFound, nil);
-    STAssertTrue([string rangeOfString:@"two"].location != NSNotFound, nil);
+    XCTAssertTrue([string rangeOfString:@"one"].location != NSNotFound);
+    XCTAssertTrue([string rangeOfString:@"two"].location != NSNotFound);
 }
 
 - (void)testDeserialize {
@@ -50,13 +50,13 @@
                                                                   error:nil];
     NSLog(@"\n%@", dict);
     
-    STAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"], nil);
-    STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
-    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"], nil);
-    STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
+    XCTAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"]);
+    XCTAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"]);
+    XCTAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"]);
+    XCTAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"]);
     
     NSArray *a = @[@"one", @"two"];
-    STAssertTrue([dict[@"Array"] isEqualToArray:a], nil);
+    XCTAssertTrue([dict[@"Array"] isEqualToArray:a]);
 }
 
 - (void)testDeserialize2 {
@@ -68,13 +68,13 @@
                                                                   error:nil];
     NSLog(@"\n%@", dict);
     
-    STAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"], nil);
-    STAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"], nil);
-    STAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"], nil);
-    STAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"], nil);
+    XCTAssertTrue([dict[ACCodeSnippetTitleKey] isEqualToString:@"title"]);
+    XCTAssertTrue([dict[ACCodeSnippetSummaryKey] isEqualToString:@"summary"]);
+    XCTAssertTrue([dict[ACCodeSnippetContentsKey] isEqualToString:@"line1\nline2\nline3\n"]);
+    XCTAssertTrue([dict[@"WhateverKey"] isEqualToString:@"WhateverValue"]);
     
     NSArray *a = @[@"one", @"two"];
-    STAssertTrue([dict[@"Array"] isEqualToArray:a], nil);
+    XCTAssertTrue([dict[@"Array"] isEqualToArray:a]);
 }
 
 - (void)testSerializeDeserialize {
@@ -96,7 +96,7 @@
                                                                 options:0
                                                                  format:ACCodeSnippetSerializationFormatC
                                                                   error:nil];
-    STAssertTrue([dict1 isEqualToDictionary:dict2], nil);
+    XCTAssertTrue([dict1 isEqualToDictionary:dict2]);
     
 }
 

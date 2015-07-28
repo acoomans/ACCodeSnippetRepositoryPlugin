@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ACGitRepository.h"
 
-@interface ACGitRepositoryTests : SenTestCase
+@interface ACGitRepositoryTests : XCTestCase
 @end
 
 @implementation ACGitRepositoryTests

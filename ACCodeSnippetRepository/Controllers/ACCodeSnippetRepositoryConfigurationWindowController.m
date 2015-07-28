@@ -57,7 +57,9 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField *textField = [notification object];
     
-    if (![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
+    if (([textField stringValue] &&
+	    [[textField stringValue] length]) &&
+	   ![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
         self.forkRemoteRepositoryButton.enabled = YES;
     } else {
         self.forkRemoteRepositoryButton.enabled = NO;
@@ -120,8 +122,10 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
                         [weakSelf.window endSheet:weakSelf.progressPanel];
                         [weakSelf.progressIndicator stopAnimation:weakSelf];
                     });
-                    
-                    [weakSelf importUserSnippetsAction:weakSelf];
+				 
+				 dispatch_async(dispatch_get_main_queue(), ^{
+					[weakSelf importUserSnippetsAction:weakSelf];
+				 });
                 });
 
                 break;
@@ -242,7 +246,7 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 }
 
 - (IBAction)openSystemSnippetsDirectoryAction:(id)sender {
-    [[NSWorkspace sharedWorkspace] selectFile:[self systemSnippetsPath] inFileViewerRootedAtPath:nil];
+    [[NSWorkspace sharedWorkspace] selectFile:[self systemSnippetsPath] inFileViewerRootedAtPath: @""];
 }
 
 - (NSString*)systemSnippetsPath {
