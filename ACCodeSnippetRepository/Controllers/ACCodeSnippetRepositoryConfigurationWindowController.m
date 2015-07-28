@@ -57,7 +57,9 @@ NSString * const ACCodeSnippetRepositoryUpdateRegularlyKey = @"ACCodeSnippetRepo
 - (void)controlTextDidChange:(NSNotification *)notification {
     NSTextField *textField = [notification object];
     
-    if (![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
+    if (([textField stringValue] &&
+	    [[textField stringValue] length]) &&
+	   ![[NSURL URLWithString:textField.stringValue] isEqualTo:self.gitDataStore.remoteRepositoryURL]) {
         self.cloneRemoteRepositoryButton.enabled = YES;
     } else {
         self.cloneRemoteRepositoryButton.enabled = NO;
