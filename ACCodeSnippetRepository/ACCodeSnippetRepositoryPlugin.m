@@ -39,7 +39,12 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
         
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
-        
+	    
+	    [[NSNotificationCenter defaultCenter] addObserver: self
+										selector: @selector(applicationDidFinishLaunching:)
+										    name: NSApplicationDidFinishLaunchingNotification
+										  object: nil];
+	    
         // add data stores to Xcode's snippet repository
         ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] init];
         [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
@@ -58,27 +63,28 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
             [self startTimer];
         }
         
-        // Create menu items, initialize UI, etc.
-        NSMenu *pluginMenu = [self pluginMenu];
-        pluginMenu.autoenablesItems = NO;
-        
-        if (pluginMenu) {
-            
-            NSMenuItem *actionMenuItem = nil;
-            
-            self.updateMenuItem = actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Update snippets" action:@selector(updateAction:) keyEquivalent:@""];
-            actionMenuItem.target = self;
-            [pluginMenu addItem:actionMenuItem];
-            
-            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippets repository" action:@selector(configureAction:) keyEquivalent:@""];
-            actionMenuItem.target = self;
-            [pluginMenu addItem:actionMenuItem];
-            
-            //[pluginMenu addItem:[NSMenuItem separatorItem]];
-        }
-        
     }
     return self;
+}
+
+- (void) applicationDidFinishLaunching: (NSNotification *) notification
+{
+	// Create menu items, initialize UI, etc.
+	NSMenu *pluginMenu = [self pluginMenu];
+	pluginMenu.autoenablesItems = NO;
+	
+	if (pluginMenu) {
+		
+		NSMenuItem *actionMenuItem = nil;
+		
+		self.updateMenuItem = actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Update snippets" action:@selector(updateAction:) keyEquivalent:@""];
+		actionMenuItem.target = self;
+		[pluginMenu addItem:actionMenuItem];
+		
+		actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippets repository" action:@selector(configureAction:) keyEquivalent:@""];
+		actionMenuItem.target = self;
+		[pluginMenu addItem:actionMenuItem];
+	}
 }
 
 - (id)init {
@@ -97,10 +103,14 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     if (!pluginMenu) {
         pluginMenu = [[NSMenu alloc] initWithTitle:pluginMenuTitle];
         
-        NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginMenuTitle action:nil keyEquivalent:@""];
+        NSMenuItem *pluginMenuItem = [[NSMenuItem alloc] initWithTitle:pluginMenuTitle action: NULL keyEquivalent:@""];
         pluginMenuItem.submenu = pluginMenu;
-        
-        [[NSApp mainMenu] addItem:pluginMenuItem];
+	    
+	    NSMenu *appMenu = [NSApp menu];
+	    
+	    NSMenuItem *helpMenuItem = [appMenu itemWithTitle: @"Help"];
+	    
+	    [appMenu insertItem: pluginMenuItem atIndex: [appMenu indexOfItem: helpMenuItem]];
     }
     return pluginMenu;
 }

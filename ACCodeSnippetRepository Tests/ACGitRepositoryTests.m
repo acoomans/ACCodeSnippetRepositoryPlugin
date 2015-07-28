@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ACGitRepository.h"
 
-@interface ACGitRepositoryTests : SenTestCase
+@interface ACGitRepositoryTests : XCTestCase
 @end
 
 @implementation ACGitRepositoryTests
@@ -23,7 +23,7 @@
     
     ACGitRepository *git = [[ACGitRepository alloc] initWithLocalRepositoryDirectory:gitPath];
     
-    //[git forkRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
+    //[git cloneRemoteRepositoryWithURL:gitURL inDirectory:gitPath];
     //[git removeLocalRepository];
     //NSLog(@"%@", [git identifierForCurrentCommit]);
     //NSLog(@"%@", [git changedFilesSinceCommitWithIdentifier:@"HEAD~6"]);

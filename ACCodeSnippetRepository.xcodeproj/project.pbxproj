@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012836131B11EC41007236B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 012836121B11EC41007236B8 /* Images.xcassets */; };
+		012836141B11EC41007236B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 012836121B11EC41007236B8 /* Images.xcassets */; };
 		51010E0218AC5CB1000AA1F1 /* ACGitRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 51010E0118AC5CB1000AA1F1 /* ACGitRepository.m */; };
 		51010E0318AC5CB1000AA1F1 /* ACGitRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 51010E0118AC5CB1000AA1F1 /* ACGitRepository.m */; };
 		5105B22718AC59520066728E /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 5105B22618AC59520066728E /* NSTask+Extras.m */; };
@@ -16,11 +18,7 @@
 		5153BAA918B3406D00C1E75B /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */; };
 		5153BAAA18B3406D00C1E75B /* NSDictionary+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */; };
 		5153BAAC18B3410C00C1E75B /* NSDictionary+MergeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5153BAAB18B3410C00C1E75B /* NSDictionary+MergeTests.m */; };
-		5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5154068418AC4B500065CA33 /* SenTestingKit.framework */; };
 		5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5154068918AC4B500065CA33 /* InfoPlist.strings */; };
-		515CE9DA18B1DCAA000962EA /* GitHub-Mark-120px-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */; };
-		515CE9DB18B1DCAA000962EA /* GitHub-Mark-32px.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */; };
-		515CE9DC18B1DCAA000962EA /* GitHub-Mark-64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */; };
 		5162AC2A18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5162AC2818AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m */; };
 		5162AC2B18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5162AC2918AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib */; };
 		517DF2A618AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DF2A318AC4BF1008980B3 /* IDECodeSnippetRepositorySwizzler.m */; };
@@ -51,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		012836121B11EC41007236B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		51010E0018AC5CB1000AA1F1 /* ACGitRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACGitRepository.h; sourceTree = "<group>"; };
 		51010E0118AC5CB1000AA1F1 /* ACGitRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACGitRepository.m; sourceTree = "<group>"; };
 		5105B22518AC59520066728E /* NSTask+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Extras.h"; sourceTree = "<group>"; };
@@ -60,14 +59,10 @@
 		5153BAA718B3406D00C1E75B /* NSDictionary+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Merge.h"; sourceTree = "<group>"; };
 		5153BAA818B3406D00C1E75B /* NSDictionary+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Merge.m"; sourceTree = "<group>"; };
 		5153BAAB18B3410C00C1E75B /* NSDictionary+MergeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MergeTests.m"; sourceTree = "<group>"; };
-		5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACCodeSnippetRepository Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5154068418AC4B500065CA33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACCodeSnippetRepository Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5154068818AC4B500065CA33 /* ACCodeSnippetRepository Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACCodeSnippetRepository Tests-Info.plist"; sourceTree = "<group>"; };
 		5154068A18AC4B500065CA33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5154068E18AC4B500065CA33 /* ACCodeSnippetRepository Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACCodeSnippetRepository Tests-Prefix.pch"; sourceTree = "<group>"; };
-		515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-120px-plus.png"; sourceTree = "<group>"; };
-		515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-32px.png"; sourceTree = "<group>"; };
-		515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GitHub-Mark-64px.png"; sourceTree = "<group>"; };
 		5162AC2718AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACCodeSnippetRepositoryConfigurationWindowController.h; sourceTree = "<group>"; };
 		5162AC2818AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACCodeSnippetRepositoryConfigurationWindowController.m; sourceTree = "<group>"; };
 		5162AC2918AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACCodeSnippetRepositoryConfigurationWindowController.xib; sourceTree = "<group>"; };
@@ -104,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5154068518AC4B500065CA33 /* SenTestingKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,19 +139,9 @@
 		515CE9D518B1DCAA000962EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				515CE9D618B1DCAA000962EA /* Images */,
+				012836121B11EC41007236B8 /* Images.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		515CE9D618B1DCAA000962EA /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				515CE9D718B1DCAA000962EA /* GitHub-Mark-120px-plus.png */,
-				515CE9D818B1DCAA000962EA /* GitHub-Mark-32px.png */,
-				515CE9D918B1DCAA000962EA /* GitHub-Mark-64px.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		5162AC2618AD9FB4000109C9 /* Controllers */ = {
@@ -247,7 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				518E699F18AC4A8900C57456 /* ACCodeSnippetRepository.xcplugin */,
-				5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */,
+				5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,7 +241,6 @@
 			children = (
 				518E69A218AC4A8900C57456 /* AppKit.framework */,
 				518E69A418AC4A8900C57456 /* Foundation.framework */,
-				5154068418AC4B500065CA33 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -318,8 +301,8 @@
 			);
 			name = "ACCodeSnippetRepository Tests";
 			productName = "ACCodeSnippetRepository Tests";
-			productReference = 5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		518E699E18AC4A8900C57456 /* ACCodeSnippetRepository */ = {
 			isa = PBXNativeTarget;
@@ -344,7 +327,8 @@
 		518E699718AC4A8900C57456 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastTestingUpgradeCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Arnaud Coomans";
 				TargetAttributes = {
 					5154068218AC4B500065CA33 = {
@@ -376,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5154068B18AC4B500065CA33 /* InfoPlist.strings in Resources */,
+				012836141B11EC41007236B8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,11 +368,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				515CE9DC18B1DCAA000962EA /* GitHub-Mark-64px.png in Resources */,
-				515CE9DB18B1DCAA000962EA /* GitHub-Mark-32px.png in Resources */,
 				5162AC2B18AD9FD0000109C9 /* ACCodeSnippetRepositoryConfigurationWindowController.xib in Resources */,
+				012836131B11EC41007236B8 /* Images.xcassets in Resources */,
 				518E69AB18AC4A8900C57456 /* InfoPlist.strings in Resources */,
-				515CE9DA18B1DCAA000962EA /* GitHub-Mark-120px-plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +446,7 @@
 		5154069118AC4B500065CA33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -474,14 +458,15 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
 		5154069218AC4B500065CA33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -489,8 +474,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Prefix.pch";
 				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -510,6 +495,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -573,6 +559,7 @@
 				INFOPLIST_FILE = "ACCodeSnippetRepository/ACCodeSnippetRepository-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -589,6 +576,7 @@
 				INFOPLIST_FILE = "ACCodeSnippetRepository/ACCodeSnippetRepository-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};

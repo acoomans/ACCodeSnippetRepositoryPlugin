@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.acoomans.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,6 +31,8 @@
 		<string>FEC992CC-CA4A-4CFD-8881-77300FCB848A</string>
 		<string>A16FF353-8441-459E-A50C-B071F53F51B7</string>
 		<string>9F75337B-21B4-4ADC-B558-F9CADF7073A7</string>
+		<string>AABB7188-E14E-4433-AD3B-5CD791EAD9A3</string>
+		<string>7FDF5C7A-131F-4ABB-9EDC-8C5F8F0B8A90</string>
 	</array>
 	<key>NSPrincipalClass</key>
 	<string>ACCodeSnippetRepositoryPlugin</string>

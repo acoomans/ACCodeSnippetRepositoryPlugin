@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NSDictionary+Merge.h"
 
-@interface NSDictionary_MergeTests : SenTestCase
+@interface NSDictionary_MergeTests : XCTestCase
 @end
 
 @implementation NSDictionary_MergeTests
@@ -25,9 +25,9 @@
                                                          @"c": @"c"
                                                          }];
     
-    STAssertTrue([r[@"a"] isEqualToString:@"a"], nil);
-    STAssertTrue([r[@"b"] isEqualToString:@"b"], nil);
-    STAssertTrue([r[@"c"] isEqualToString:@"c"], nil);
+    XCTAssertTrue([r[@"a"] isEqualToString:@"a"]);
+    XCTAssertTrue([r[@"b"] isEqualToString:@"b"]);
+    XCTAssertTrue([r[@"c"] isEqualToString:@"c"]);
 }
 
 @end
