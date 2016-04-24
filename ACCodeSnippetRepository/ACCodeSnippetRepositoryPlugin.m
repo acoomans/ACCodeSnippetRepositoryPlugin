@@ -14,7 +14,7 @@
 
 
 static ACCodeSnippetRepositoryPlugin *sharedPlugin;
-static NSString * const pluginMenuTitle = @"Plug-ins";
+static NSString * const pluginMenuTitle = @"Source Control";
 
 @interface ACCodeSnippetRepositoryPlugin()
 @property (nonatomic, strong) NSBundle *bundle;
@@ -34,12 +34,21 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     }
 }
 
+
+
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
         
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didApplicationFinishLaunchingNotification:)
+                                                     name:NSApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+        
+                                                   
         // add data stores to Xcode's snippet repository
         ACCodeSnippetGitDataStore *gitDataStore = [[ACCodeSnippetGitDataStore alloc] init];
         [gitDataStore addObserver:self forKeyPath:@"mainQueue.operationCount" options:0 context:NULL];
@@ -58,28 +67,43 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
             [self startTimer];
         }
         
-        // Create menu items, initialize UI, etc.
-        NSMenu *pluginMenu = [self pluginMenu];
-        pluginMenu.autoenablesItems = NO;
-        
-        if (pluginMenu) {
-            
-            NSMenuItem *actionMenuItem = nil;
-            
-            self.updateMenuItem = actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Update snippets" action:@selector(updateAction:) keyEquivalent:@""];
-            actionMenuItem.target = self;
-            [pluginMenu addItem:actionMenuItem];
-            
-            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippets repository" action:@selector(configureAction:) keyEquivalent:@""];
-            actionMenuItem.target = self;
-            [pluginMenu addItem:actionMenuItem];
-            
-            //[pluginMenu addItem:[NSMenuItem separatorItem]];
-        }
-        
+    
     }
     return self;
 }
+- (void)didApplicationFinishLaunchingNotification:(NSNotification*)noti
+{
+        //removeObserver
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
+    
+        // Create menu items, initialize UI, etc.
+        // Sample Menu Item:
+        // Create menu items, initialize UI, etc.
+    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Source Control"];
+    if (menuItem) {
+        [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
+        NSMenuItem *actionMenuItem = nil;
+        
+        self.updateMenuItem = actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Update snippets" action:@selector(updateAction:) keyEquivalent:@""];
+        [actionMenuItem setTarget:self];
+        [[menuItem submenu] addItem:actionMenuItem];
+        
+        actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure snippets repository" action:@selector(configureAction:) keyEquivalent:@""];
+        [actionMenuItem setTarget:self];
+        [[menuItem submenu] addItem:actionMenuItem];
+    }
+    
+}
+
+
+    // Sample Action, for menu item:
+- (void)doMenuAction
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Hello, World"];
+    [alert runModal];
+}
+
 
 - (id)init {
     return [self initWithBundle:nil];

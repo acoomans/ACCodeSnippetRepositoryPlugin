@@ -319,7 +319,7 @@
 			name = "ACCodeSnippetRepository Tests";
 			productName = "ACCodeSnippetRepository Tests";
 			productReference = 5154068318AC4B500065CA33 /* ACCodeSnippetRepository Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		518E699E18AC4A8900C57456 /* ACCodeSnippetRepository */ = {
 			isa = PBXNativeTarget;
@@ -328,6 +328,7 @@
 				518E699B18AC4A8900C57456 /* Sources */,
 				518E699C18AC4A8900C57456 /* Frameworks */,
 				518E699D18AC4A8900C57456 /* Resources */,
+				11AE833A1CAABCC800EA6FB6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -344,7 +345,8 @@
 		518E699718AC4A8900C57456 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastTestingUpgradeCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Arnaud Coomans";
 				TargetAttributes = {
 					5154068218AC4B500065CA33 = {
@@ -392,6 +394,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11AE833A1CAABCC800EA6FB6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n\n\n\nPLISTBUDDY=\"/usr/libexec/PlistBuddy\"\n\n\n\n\n#Get current Xcode DVTPlugInCompatibilityUUID\n\nUUID=$(defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID)\n\necho Xcode DVTPlugInCompatibilityUUID is $UUID\n\n\n\n\n#Traversal all plugins, and update UUID\n\nfor MyPlugin in ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/ACCodeSnippetRepository.xcplugin/*\n                                                                                                                \n                                                                                                                do\n                                                                                                                \n                                                                                                                $PLISTBUDDY -c \"Add :DVTPlugInCompatibilityUUIDs: string $UUID\" \"$MyPlugin\"/Info.plist\n                                                                                                                \n                                                                                                                echo write DVTPlugInCompatibilityUUID to $MyPlugin succeed!\n                                                                                                                \n                                                                                                                done";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5154067F18AC4B500065CA33 /* Sources */ = {
@@ -463,6 +481,7 @@
 		5154069118AC4B500065CA33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -474,6 +493,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -482,6 +502,7 @@
 		5154069218AC4B500065CA33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -489,6 +510,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Prefix.pch";
 				INFOPLIST_FILE = "ACCodeSnippetRepository Tests/ACCodeSnippetRepository Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -510,6 +532,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -573,6 +596,7 @@
 				INFOPLIST_FILE = "ACCodeSnippetRepository/ACCodeSnippetRepository-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -589,6 +613,7 @@
 				INFOPLIST_FILE = "ACCodeSnippetRepository/ACCodeSnippetRepository-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acoomans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};
