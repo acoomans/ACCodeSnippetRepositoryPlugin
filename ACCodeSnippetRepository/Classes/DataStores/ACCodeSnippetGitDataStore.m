@@ -323,7 +323,7 @@
 }
 
 - (NSString*)localRepositoryPath {
-    return [NSString pathWithComponents:@[self.pathForSnippetDirectory, @"git"]];
+    return [self pathForSnippetDirectory];
 }
 
 - (BOOL)isSnippetFileAtPath:(NSString*)path {
